@@ -168,10 +168,12 @@
   function renderIntro(stage) {
     var entryId = stage.items[position.taskIndex];
     var entry = maps.entries[entryId];
+    var concept = position.taskIndex === 0 ? renderHereThereConcept() : "";
 
     appRoot.innerHTML =
       renderLessonHeader(stage.title) +
       '<main class="lesson-screen">' +
+        concept +
         '<section class="stage-card intro-card">' +
           '<div class="intro-emoji" aria-hidden="true">' + escapeHtml(entry.emoji) + '</div>' +
           '<h2 class="big-russian">' + escapeHtml(entry.text) + '</h2>' +
@@ -273,8 +275,8 @@
               return '<li>' + escapeHtml(entry.text) + '</li>';
             }).join("") +
           '</ul>' +
-          '<button class="primary-button" type="button" data-action="home">Домой</button>' +
-          '<button class="secondary-button" type="button" data-action="again">Ещё раз</button>' +
+          '<button class="primary-button" type="button" data-action="home">🏠 Домой</button>' +
+          '<button class="secondary-button" type="button" data-action="again">↩️ Ещё раз</button>' +
         '</section>' +
       '</main>';
 
@@ -289,7 +291,7 @@
     var unit = getCurrentUnit();
     return '<header class="topbar">' +
       '<div class="brand">' +
-        '<button class="home-button" type="button" onclick="LexiLandApp.home()" aria-label="Домой">⌂</button>' +
+        '<button class="home-button" type="button" onclick="LexiLandApp.home()" aria-label="Домой">🏠</button>' +
         '<div>' +
           '<h2>' + escapeHtml(unit.title) + '</h2>' +
           '<small>' + escapeHtml(title) + '</small>' +
@@ -395,11 +397,25 @@
   function soundPanel(task) {
     return '<div class="sound-panel">' +
       '<div>' +
+        (task.emoji ? '<div class="prompt-visual" aria-hidden="true">' + escapeHtml(task.emoji) + '</div>' : "") +
         '<div class="prompt-text">' + escapeHtml(task.text) + '</div>' +
         '<div id="audio-warning" class="audio-warning" aria-live="polite"></div>' +
       '</div>' +
       '<button class="audio-button" type="button" data-action="listen">▶️ Слушать</button>' +
     '</div>';
+  }
+
+  function renderHereThereConcept() {
+    return '<section class="concept-card" aria-label="здесь там">' +
+      '<div class="concept-side here">' +
+        '<strong>Здесь</strong>' +
+        '<span class="concept-pin">📍</span>' +
+      '</div>' +
+      '<div class="concept-side there">' +
+        '<strong>Там</strong>' +
+        '<span class="concept-arrow">→</span>' +
+      '</div>' +
+    '</section>';
   }
 
   function bindSound(root, task) {
@@ -816,6 +832,7 @@
       return {
         id: id,
         text: byId[prompt].text,
+        emoji: byId[prompt].emoji,
         audio: byId[prompt].audio,
         options: options,
         correct: correct || prompt
@@ -826,6 +843,7 @@
       return {
         id: id,
         text: byId[prompt].text,
+        emoji: byId[prompt].emoji,
         audio: byId[prompt].audio,
         correctScene: correctScene,
         options: options
@@ -836,6 +854,7 @@
       return {
         id: id,
         text: byId[prompt].text,
+        emoji: byId[prompt].emoji,
         audio: byId[prompt].audio,
         scene: scene,
         correct: correct
@@ -846,6 +865,7 @@
       return {
         id: id,
         text: byId[prompt].text,
+        emoji: byId[prompt].emoji,
         audio: byId[prompt].audio,
         scene: scene,
         correctZone: correctZone
@@ -856,6 +876,7 @@
       return {
         id: id,
         text: byId[prompt].text,
+        emoji: byId[prompt].emoji,
         audio: byId[prompt].audio,
         objects: objects,
         correctTarget: correctTarget,
@@ -876,6 +897,7 @@
       return {
         id: id,
         text: byId[prompt].text,
+        emoji: byId[prompt].emoji,
         audio: byId[prompt].audio,
         width: 5,
         height: 5,

@@ -961,6 +961,7 @@
             {
               "id": "tap-1",
               "text": "да",
+              "emoji": "✅",
               "audio": "assets/audio/ru/da.mp3",
               "options": [
                 "da",
@@ -972,6 +973,7 @@
             {
               "id": "tap-2",
               "text": "нет",
+              "emoji": "❌",
               "audio": "assets/audio/ru/net.mp3",
               "options": [
                 "net",
@@ -983,6 +985,7 @@
             {
               "id": "tap-3",
               "text": "здесь",
+              "emoji": "📍",
               "audio": "assets/audio/ru/zdes.mp3",
               "options": [
                 "zdes",
@@ -994,6 +997,7 @@
             {
               "id": "tap-4",
               "text": "там",
+              "emoji": "👉",
               "audio": "assets/audio/ru/tam.mp3",
               "options": [
                 "tam",
@@ -1005,6 +1009,7 @@
             {
               "id": "tap-5",
               "text": "это",
+              "emoji": "👀",
               "audio": "assets/audio/ru/eto.mp3",
               "options": [
                 "eto",
@@ -1016,6 +1021,7 @@
             {
               "id": "tap-6",
               "text": "один",
+              "emoji": "1️⃣",
               "audio": "assets/audio/ru/odin.mp3",
               "options": [
                 "odin",
@@ -1027,6 +1033,7 @@
             {
               "id": "tap-7",
               "text": "два",
+              "emoji": "2️⃣",
               "audio": "assets/audio/ru/dva.mp3",
               "options": [
                 "dva",
@@ -1038,6 +1045,7 @@
             {
               "id": "tap-8",
               "text": "яблоко",
+              "emoji": "🍎",
               "audio": "assets/audio/ru/yabloko.mp3",
               "options": [
                 "yabloko",
@@ -1049,6 +1057,7 @@
             {
               "id": "tap-9",
               "text": "вода",
+              "emoji": "💧",
               "audio": "assets/audio/ru/voda.mp3",
               "options": [
                 "voda",
@@ -1060,6 +1069,7 @@
             {
               "id": "tap-10",
               "text": "автобус",
+              "emoji": "🚌",
               "audio": "assets/audio/ru/avtobus.mp3",
               "options": [
                 "avtobus",
@@ -1071,6 +1081,7 @@
             {
               "id": "tap-11",
               "text": "дом",
+              "emoji": "🏠",
               "audio": "assets/audio/ru/dom.mp3",
               "options": [
                 "dom",
@@ -1082,6 +1093,7 @@
             {
               "id": "tap-12",
               "text": "синий",
+              "emoji": "🔵",
               "audio": "assets/audio/ru/siniy.mp3",
               "options": [
                 "siniy",
@@ -1093,6 +1105,7 @@
             {
               "id": "tap-13",
               "text": "красный",
+              "emoji": "🔴",
               "audio": "assets/audio/ru/krasniy.mp3",
               "options": [
                 "krasniy",
@@ -1104,6 +1117,7 @@
             {
               "id": "tap-14",
               "text": "здесь яблоко",
+              "emoji": "📍🍎",
               "audio": "assets/audio/ru/zdes_yabloko.mp3",
               "options": [
                 "zdes_yabloko",
@@ -1115,6 +1129,7 @@
             {
               "id": "tap-15",
               "text": "там яблоко",
+              "emoji": "👉🍎",
               "audio": "assets/audio/ru/tam_yabloko.mp3",
               "options": [
                 "tam_yabloko",
@@ -1126,6 +1141,7 @@
             {
               "id": "tap-16",
               "text": "здесь вода",
+              "emoji": "📍💧",
               "audio": "assets/audio/ru/zdes_voda.mp3",
               "options": [
                 "zdes_voda",
@@ -1137,6 +1153,7 @@
             {
               "id": "tap-17",
               "text": "там вода",
+              "emoji": "👉💧",
               "audio": "assets/audio/ru/tam_voda.mp3",
               "options": [
                 "tam_voda",
@@ -1148,6 +1165,7 @@
             {
               "id": "tap-18",
               "text": "здесь дом",
+              "emoji": "📍🏠",
               "audio": "assets/audio/ru/zdes_dom.mp3",
               "options": [
                 "zdes_dom",
@@ -1159,6 +1177,7 @@
             {
               "id": "tap-19",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "options": [
                 "tam_avtobus",
@@ -1170,6 +1189,7 @@
             {
               "id": "tap-20",
               "text": "это яблоко",
+              "emoji": "👀🍎",
               "audio": "assets/audio/ru/eto_yabloko.mp3",
               "options": [
                 "eto_yabloko",
@@ -1181,6 +1201,7 @@
             {
               "id": "tap-21",
               "text": "это вода",
+              "emoji": "👀💧",
               "audio": "assets/audio/ru/eto_voda.mp3",
               "options": [
                 "eto_voda",
@@ -1192,6 +1213,7 @@
             {
               "id": "tap-22",
               "text": "это автобус",
+              "emoji": "👀🚌",
               "audio": "assets/audio/ru/eto_avtobus.mp3",
               "options": [
                 "eto_avtobus",
@@ -1203,6 +1225,7 @@
             {
               "id": "tap-23",
               "text": "это дом",
+              "emoji": "👀🏠",
               "audio": "assets/audio/ru/eto_dom.mp3",
               "options": [
                 "eto_dom",
@@ -1214,6 +1237,7 @@
             {
               "id": "tap-24",
               "text": "здесь одно яблоко",
+              "emoji": "📍1️⃣🍎",
               "audio": "assets/audio/ru/zdes_odno_yabloko.mp3",
               "options": [
                 "zdes_odno_yabloko",
@@ -1225,6 +1249,7 @@
             {
               "id": "tap-25",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "options": [
                 "zdes_dva_yabloka",
@@ -1236,6 +1261,7 @@
             {
               "id": "tap-26",
               "text": "там один автобус",
+              "emoji": "👉1️⃣🚌",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "options": [
                 "tam_odin_avtobus",
@@ -1247,6 +1273,7 @@
             {
               "id": "tap-27",
               "text": "там два автобуса",
+              "emoji": "👉2️⃣🚌",
               "audio": "assets/audio/ru/tam_dva_avtobusa.mp3",
               "options": [
                 "tam_dva_avtobusa",
@@ -1258,6 +1285,7 @@
             {
               "id": "tap-28",
               "text": "это синий автобус",
+              "emoji": "👀🔵🚌",
               "audio": "assets/audio/ru/eto_siniy_avtobus.mp3",
               "options": [
                 "eto_siniy_avtobus",
@@ -1269,6 +1297,7 @@
             {
               "id": "tap-29",
               "text": "это красное яблоко",
+              "emoji": "👀🔴🍎",
               "audio": "assets/audio/ru/eto_krasnoe_yabloko.mp3",
               "options": [
                 "eto_krasnoe_yabloko",
@@ -1280,6 +1309,7 @@
             {
               "id": "tap-30",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "options": [
                 "zdes_dva_yabloka",
@@ -1297,6 +1327,7 @@
             {
               "id": "pic-1",
               "text": "здесь одно яблоко",
+              "emoji": "📍1️⃣🍎",
               "audio": "assets/audio/ru/zdes_odno_yabloko.mp3",
               "correctScene": "near-one-apple",
               "options": [
@@ -1308,6 +1339,7 @@
             {
               "id": "pic-2",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "correctScene": "near-two-apples",
               "options": [
@@ -1319,6 +1351,7 @@
             {
               "id": "pic-3",
               "text": "там один автобус",
+              "emoji": "👉1️⃣🚌",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "correctScene": "far-one-bus",
               "options": [
@@ -1330,6 +1363,7 @@
             {
               "id": "pic-4",
               "text": "там два автобуса",
+              "emoji": "👉2️⃣🚌",
               "audio": "assets/audio/ru/tam_dva_avtobusa.mp3",
               "correctScene": "far-two-buses",
               "options": [
@@ -1341,6 +1375,7 @@
             {
               "id": "pic-5",
               "text": "здесь вода",
+              "emoji": "📍💧",
               "audio": "assets/audio/ru/zdes_voda.mp3",
               "correctScene": "near-water",
               "options": [
@@ -1352,6 +1387,7 @@
             {
               "id": "pic-6",
               "text": "там вода",
+              "emoji": "👉💧",
               "audio": "assets/audio/ru/tam_voda.mp3",
               "correctScene": "far-water",
               "options": [
@@ -1363,6 +1399,7 @@
             {
               "id": "pic-7",
               "text": "здесь дом",
+              "emoji": "📍🏠",
               "audio": "assets/audio/ru/zdes_dom.mp3",
               "correctScene": "near-house",
               "options": [
@@ -1374,6 +1411,7 @@
             {
               "id": "pic-8",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "correctScene": "far-one-bus",
               "options": [
@@ -1385,6 +1423,7 @@
             {
               "id": "pic-9",
               "text": "это дом",
+              "emoji": "👀🏠",
               "audio": "assets/audio/ru/eto_dom.mp3",
               "correctScene": "house",
               "options": [
@@ -1396,6 +1435,7 @@
             {
               "id": "pic-10",
               "text": "это автобус",
+              "emoji": "👀🚌",
               "audio": "assets/audio/ru/eto_avtobus.mp3",
               "correctScene": "bus",
               "options": [
@@ -1407,6 +1447,7 @@
             {
               "id": "pic-11",
               "text": "это яблоко",
+              "emoji": "👀🍎",
               "audio": "assets/audio/ru/eto_yabloko.mp3",
               "correctScene": "apple",
               "options": [
@@ -1418,6 +1459,7 @@
             {
               "id": "pic-12",
               "text": "это вода",
+              "emoji": "👀💧",
               "audio": "assets/audio/ru/eto_voda.mp3",
               "correctScene": "water",
               "options": [
@@ -1429,6 +1471,7 @@
             {
               "id": "pic-13",
               "text": "это синий автобус",
+              "emoji": "👀🔵🚌",
               "audio": "assets/audio/ru/eto_siniy_avtobus.mp3",
               "correctScene": "blue-bus",
               "options": [
@@ -1440,6 +1483,7 @@
             {
               "id": "pic-14",
               "text": "это красное яблоко",
+              "emoji": "👀🔴🍎",
               "audio": "assets/audio/ru/eto_krasnoe_yabloko.mp3",
               "correctScene": "red-apple",
               "options": [
@@ -1451,6 +1495,7 @@
             {
               "id": "pic-15",
               "text": "здесь яблоко",
+              "emoji": "📍🍎",
               "audio": "assets/audio/ru/zdes_yabloko.mp3",
               "correctScene": "near-one-apple",
               "options": [
@@ -1462,6 +1507,7 @@
             {
               "id": "pic-16",
               "text": "там яблоко",
+              "emoji": "👉🍎",
               "audio": "assets/audio/ru/tam_yabloko.mp3",
               "correctScene": "far-one-apple",
               "options": [
@@ -1473,6 +1519,7 @@
             {
               "id": "pic-17",
               "text": "здесь автобус",
+              "emoji": "📍🚌",
               "audio": "assets/audio/ru/zdes_avtobus.mp3",
               "correctScene": "near-one-bus",
               "options": [
@@ -1484,6 +1531,7 @@
             {
               "id": "pic-18",
               "text": "там дом",
+              "emoji": "👉🏠",
               "audio": "assets/audio/ru/tam_dom.mp3",
               "correctScene": "far-house",
               "options": [
@@ -1495,6 +1543,7 @@
             {
               "id": "pic-19",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "correctScene": "near-two-apples",
               "options": [
@@ -1506,6 +1555,7 @@
             {
               "id": "pic-20",
               "text": "там один автобус",
+              "emoji": "👉1️⃣🚌",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "correctScene": "far-one-bus",
               "options": [
@@ -1517,6 +1567,7 @@
             {
               "id": "pic-21",
               "text": "это синий дом",
+              "emoji": "👀🔵🏠",
               "audio": "assets/audio/ru/eto_siniy_dom.mp3",
               "correctScene": "blue-house",
               "options": [
@@ -1528,6 +1579,7 @@
             {
               "id": "pic-22",
               "text": "это красный дом",
+              "emoji": "👀🔴🏠",
               "audio": "assets/audio/ru/eto_krasniy_dom.mp3",
               "correctScene": "red-house",
               "options": [
@@ -1539,6 +1591,7 @@
             {
               "id": "pic-23",
               "text": "здесь вода",
+              "emoji": "📍💧",
               "audio": "assets/audio/ru/zdes_voda.mp3",
               "correctScene": "near-water-far-bus",
               "options": [
@@ -1550,6 +1603,7 @@
             {
               "id": "pic-24",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "correctScene": "near-house-far-bus",
               "options": [
@@ -1561,6 +1615,7 @@
             {
               "id": "pic-25",
               "text": "это красное яблоко",
+              "emoji": "👀🔴🍎",
               "audio": "assets/audio/ru/eto_krasnoe_yabloko.mp3",
               "correctScene": "red-apple",
               "options": [
@@ -1578,6 +1633,7 @@
             {
               "id": "yn-1",
               "text": "это яблоко",
+              "emoji": "👀🍎",
               "audio": "assets/audio/ru/eto_yabloko.mp3",
               "scene": "apple",
               "correct": "da"
@@ -1585,6 +1641,7 @@
             {
               "id": "yn-2",
               "text": "это яблоко",
+              "emoji": "👀🍎",
               "audio": "assets/audio/ru/eto_yabloko.mp3",
               "scene": "bus",
               "correct": "net"
@@ -1592,6 +1649,7 @@
             {
               "id": "yn-3",
               "text": "это синий автобус",
+              "emoji": "👀🔵🚌",
               "audio": "assets/audio/ru/eto_siniy_avtobus.mp3",
               "scene": "blue-bus",
               "correct": "da"
@@ -1599,6 +1657,7 @@
             {
               "id": "yn-4",
               "text": "это синий автобус",
+              "emoji": "👀🔵🚌",
               "audio": "assets/audio/ru/eto_siniy_avtobus.mp3",
               "scene": "red-apple",
               "correct": "net"
@@ -1606,6 +1665,7 @@
             {
               "id": "yn-5",
               "text": "это красное яблоко",
+              "emoji": "👀🔴🍎",
               "audio": "assets/audio/ru/eto_krasnoe_yabloko.mp3",
               "scene": "red-apple",
               "correct": "da"
@@ -1613,6 +1673,7 @@
             {
               "id": "yn-6",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "scene": "near-two-apples",
               "correct": "da"
@@ -1620,6 +1681,7 @@
             {
               "id": "yn-7",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "scene": "far-house",
               "correct": "net"
@@ -1627,6 +1689,7 @@
             {
               "id": "yn-8",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "scene": "far-one-bus",
               "correct": "da"
@@ -1634,6 +1697,7 @@
             {
               "id": "yn-9",
               "text": "здесь вода",
+              "emoji": "📍💧",
               "audio": "assets/audio/ru/zdes_voda.mp3",
               "scene": "near-water",
               "correct": "da"
@@ -1641,6 +1705,7 @@
             {
               "id": "yn-10",
               "text": "здесь вода",
+              "emoji": "📍💧",
               "audio": "assets/audio/ru/zdes_voda.mp3",
               "scene": "far-water",
               "correct": "net"
@@ -1648,6 +1713,7 @@
             {
               "id": "yn-11",
               "text": "это дом",
+              "emoji": "👀🏠",
               "audio": "assets/audio/ru/eto_dom.mp3",
               "scene": "house",
               "correct": "da"
@@ -1655,6 +1721,7 @@
             {
               "id": "yn-12",
               "text": "это автобус",
+              "emoji": "👀🚌",
               "audio": "assets/audio/ru/eto_avtobus.mp3",
               "scene": "water",
               "correct": "net"
@@ -1662,6 +1729,7 @@
             {
               "id": "yn-13",
               "text": "это красный дом",
+              "emoji": "👀🔴🏠",
               "audio": "assets/audio/ru/eto_krasniy_dom.mp3",
               "scene": "red-house",
               "correct": "da"
@@ -1669,6 +1737,7 @@
             {
               "id": "yn-14",
               "text": "это синий дом",
+              "emoji": "👀🔵🏠",
               "audio": "assets/audio/ru/eto_siniy_dom.mp3",
               "scene": "blue-house",
               "correct": "da"
@@ -1676,6 +1745,7 @@
             {
               "id": "yn-15",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "scene": "near-one-apple",
               "correct": "net"
@@ -1689,6 +1759,7 @@
             {
               "id": "loc-1",
               "text": "здесь яблоко",
+              "emoji": "📍🍎",
               "audio": "assets/audio/ru/zdes_yabloko.mp3",
               "scene": "near-apple-far-water",
               "correctZone": "near"
@@ -1696,6 +1767,7 @@
             {
               "id": "loc-2",
               "text": "там вода",
+              "emoji": "👉💧",
               "audio": "assets/audio/ru/tam_voda.mp3",
               "scene": "near-apple-far-water",
               "correctZone": "far"
@@ -1703,6 +1775,7 @@
             {
               "id": "loc-3",
               "text": "здесь дом",
+              "emoji": "📍🏠",
               "audio": "assets/audio/ru/zdes_dom.mp3",
               "scene": "near-house-far-bus",
               "correctZone": "near"
@@ -1710,6 +1783,7 @@
             {
               "id": "loc-4",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "scene": "near-house-far-bus",
               "correctZone": "far"
@@ -1717,6 +1791,7 @@
             {
               "id": "loc-5",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "scene": "near-two-apples-far-house",
               "correctZone": "near"
@@ -1724,6 +1799,7 @@
             {
               "id": "loc-6",
               "text": "там один автобус",
+              "emoji": "👉1️⃣🚌",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "scene": "near-water-far-bus",
               "correctZone": "far"
@@ -1731,6 +1807,7 @@
             {
               "id": "loc-7",
               "text": "здесь вода",
+              "emoji": "📍💧",
               "audio": "assets/audio/ru/zdes_voda.mp3",
               "scene": "near-water-far-bus",
               "correctZone": "near"
@@ -1738,6 +1815,7 @@
             {
               "id": "loc-8",
               "text": "там дом",
+              "emoji": "👉🏠",
               "audio": "assets/audio/ru/tam_dom.mp3",
               "scene": "near-bus-far-house",
               "correctZone": "far"
@@ -1745,6 +1823,7 @@
             {
               "id": "loc-9",
               "text": "здесь автобус",
+              "emoji": "📍🚌",
               "audio": "assets/audio/ru/zdes_avtobus.mp3",
               "scene": "near-bus-far-apple",
               "correctZone": "near"
@@ -1752,6 +1831,7 @@
             {
               "id": "loc-10",
               "text": "там яблоко",
+              "emoji": "👉🍎",
               "audio": "assets/audio/ru/tam_yabloko.mp3",
               "scene": "near-bus-far-apple",
               "correctZone": "far"
@@ -1765,6 +1845,7 @@
             {
               "id": "mini-1",
               "text": "здесь яблоко",
+              "emoji": "📍🍎",
               "audio": "assets/audio/ru/zdes_yabloko.mp3",
               "objects": [
                 {
@@ -1790,6 +1871,7 @@
             {
               "id": "mini-2",
               "text": "там автобус",
+              "emoji": "👉🚌",
               "audio": "assets/audio/ru/tam_avtobus.mp3",
               "objects": [
                 {
@@ -1815,6 +1897,7 @@
             {
               "id": "mini-3",
               "text": "это вода",
+              "emoji": "👀💧",
               "audio": "assets/audio/ru/eto_voda.mp3",
               "objects": [
                 {
@@ -1840,6 +1923,7 @@
             {
               "id": "mini-4",
               "text": "это дом",
+              "emoji": "👀🏠",
               "audio": "assets/audio/ru/eto_dom.mp3",
               "objects": [
                 {
@@ -1865,6 +1949,7 @@
             {
               "id": "mini-5",
               "text": "это синий автобус",
+              "emoji": "👀🔵🚌",
               "audio": "assets/audio/ru/eto_siniy_avtobus.mp3",
               "objects": [
                 {
@@ -1890,6 +1975,7 @@
             {
               "id": "mini-6",
               "text": "это красное яблоко",
+              "emoji": "👀🔴🍎",
               "audio": "assets/audio/ru/eto_krasnoe_yabloko.mp3",
               "objects": [
                 {
@@ -1915,6 +2001,7 @@
             {
               "id": "mini-7",
               "text": "это яблоко",
+              "emoji": "👀🍎",
               "audio": "assets/audio/ru/eto_yabloko.mp3",
               "objects": [
                 {
@@ -1940,6 +2027,7 @@
             {
               "id": "mini-8",
               "text": "здесь два яблока",
+              "emoji": "📍2️⃣🍎",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "objects": [
                 {
@@ -1978,6 +2066,7 @@
                 {
                   "id": "map-1",
                   "text": "иди к автобусу",
+                  "emoji": "➡️🚌",
                   "audio": "assets/audio/ru/idi_k_avtobusu.mp3",
                   "width": 5,
                   "height": 5,
@@ -2016,6 +2105,7 @@
                 {
                   "id": "map-2",
                   "text": "найди зелёное яблоко",
+                  "emoji": "🟢🍎",
                   "audio": "assets/audio/ru/naydi_zelyonoe_yabloko.mp3",
                   "width": 5,
                   "height": 5,
@@ -2054,6 +2144,7 @@
                 {
                   "id": "map-3",
                   "text": "найди красные яблоки",
+                  "emoji": "🔴🍎🍎",
                   "audio": "assets/audio/ru/naydi_krasnye_yabloki.mp3",
                   "width": 5,
                   "height": 5,
@@ -2092,6 +2183,7 @@
                 {
                   "id": "map-4",
                   "text": "иди в дом",
+                  "emoji": "➡️🏠",
                   "audio": "assets/audio/ru/idi_v_dom.mp3",
                   "width": 5,
                   "height": 5,
@@ -2130,6 +2222,7 @@
                 {
                   "id": "map-5",
                   "text": "выйди из дома",
+                  "emoji": "🏠➡️",
                   "audio": "assets/audio/ru/vyyidi_iz_doma.mp3",
                   "width": 5,
                   "height": 5,
@@ -2168,6 +2261,7 @@
                 {
                   "id": "map-6",
                   "text": "иди к воде",
+                  "emoji": "➡️💧",
                   "audio": "assets/audio/ru/idi_k_vode.mp3",
                   "width": 5,
                   "height": 5,
@@ -2206,6 +2300,7 @@
                 {
                   "id": "map-7",
                   "text": "иди к синему автобусу",
+                  "emoji": "➡️🔵🚌",
                   "audio": "assets/audio/ru/idi_k_sinemu_avtobusu.mp3",
                   "width": 5,
                   "height": 5,
@@ -2244,6 +2339,7 @@
                 {
                   "id": "map-8",
                   "text": "иди к красному дому",
+                  "emoji": "➡️🔴🏠",
                   "audio": "assets/audio/ru/idi_k_krasnomu_domu.mp3",
                   "width": 5,
                   "height": 5,

@@ -64,10 +64,12 @@
     function checkAnswer(action) {
       var selectedObject = task.objects[selectedIndex];
       var feedback = root.querySelector("#mini-feedback");
-      var isCorrectAction = action === task.correctAction;
-      var isCorrectTarget = task.correctAction === "no" || selectedObject.id === task.correctTarget;
+      var isOnTarget = selectedObject.id === task.correctTarget;
+      var isCorrect = task.correctAction === "no"
+        ? (action === "no" && !isOnTarget) || (action === "yes" && isOnTarget)
+        : action === task.correctAction && isOnTarget;
 
-      if (isCorrectAction && isCorrectTarget) {
+      if (isCorrect) {
         canAnswer = false;
         feedback.className = "feedback good";
         var success = helpers.playFeedback("success");
