@@ -35,6 +35,8 @@ DEFAULT_PITCH = "+0Hz"
 class AudioLine:
     text: str
     path: Path
+    rate: str | None = None
+    pitch: str | None = None
 
 
 def load_audio_lines() -> list[AudioLine]:
@@ -42,13 +44,24 @@ def load_audio_lines() -> list[AudioLine]:
     lines: dict[str, AudioLine] = {}
 
     for lesson in data["lessons"]:
-        for feedback in (lesson.get("feedbackAudio") or {}).values():
-            add_line(lines, feedback["text"], feedback["audio"])
+        for feedback_group in (lesson.get("feedbackAudio") or {}).values():
+            for feedback in normalize_feedback_group(feedback_group):
+                for variant in feedback.get("variants", []):
+                    add_line(
+                        lines,
+                        feedback["text"],
+                        variant["audio"],
+                        rate=variant.get("rate"),
+                        pitch=variant.get("pitch"),
+                    )
+
+                if feedback.get("audio"):
+                    add_line(lines, feedback["text"], feedback["audio"])
 
         for entry in lesson.get("dictionary", []):
             add_line(lines, entry["text"], entry["audio"])
 
-        for stage in lesson.get("stages", []):
+        for stage in iter_stages(lesson):
             for task in stage.get("tasks", []):
                 if task.get("text") and task.get("audio"):
                     add_line(lines, task["text"], task["audio"])
@@ -56,9 +69,35 @@ def load_audio_lines() -> list[AudioLine]:
     return sorted(lines.values(), key=lambda line: str(line.path))
 
 
-def add_line(lines: dict[str, AudioLine], text: str, audio_path: str) -> None:
+def normalize_feedback_group(group: object) -> list[dict]:
+    if isinstance(group, list):
+        return [item for item in group if isinstance(item, dict)]
+
+    if isinstance(group, dict):
+        return [group]
+
+    return []
+
+
+def iter_stages(lesson: dict) -> list[dict]:
+    stages = list(lesson.get("stages", []))
+    for unit in lesson.get("units", []):
+        stages.extend(unit.get("stages", []))
+    for unit in lesson.get("extraUnits", []):
+        stages.extend(unit.get("stages", []))
+    return stages
+
+
+def add_line(
+    lines: dict[str, AudioLine],
+    text: str,
+    audio_path: str,
+    *,
+    rate: str | None = None,
+    pitch: str | None = None,
+) -> None:
     target = ROOT / audio_path
-    lines[str(target)] = AudioLine(text=text, path=target)
+    lines[str(target)] = AudioLine(text=text, path=target, rate=rate, pitch=pitch)
 
 
 async def generate_with_edge_tts(
@@ -89,8 +128,8 @@ async def generate_with_edge_tts(
         communicate = edge_tts.Communicate(
             text=line.text,
             voice=voice,
-            rate=rate,
-            pitch=pitch,
+            rate=line.rate or rate,
+            pitch=line.pitch or pitch,
         )
         await communicate.save(str(line.path))
         created += 1

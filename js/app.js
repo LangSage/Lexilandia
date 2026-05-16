@@ -10,6 +10,7 @@
     scenes: {}
   };
   var position = {
+    unitIndex: 0,
     stageIndex: 0,
     taskIndex: 0
   };
@@ -52,9 +53,12 @@
   }
 
   function renderHome() {
-    var progress = getProgress()[lesson.id] || {};
-    var complete = Boolean(progress.complete);
-    var hasProgress = !complete && typeof progress.stageIndex === "number";
+    var units = getUnits();
+    var complete = units.filter(function (unit) {
+      return !unit.comingSoon;
+    }).every(function (unit) {
+      return isUnitComplete(unit.id);
+    });
 
     appRoot.innerHTML =
       '<main class="screen">' +
@@ -76,7 +80,11 @@
             '<span class="pill">' + (complete ? "Урок 1 ✅" : "Урок 1") + '</span>' +
           '</div>' +
           '<h3>' + escapeHtml(lesson.title) + '</h3>' +
-          '<button class="primary-button" type="button" data-action="start">' + (hasProgress ? "Продолжить" : "Начать") + '</button>' +
+          '<div class="unit-list">' +
+            units.map(function (unit, index) {
+              return unitCard(unit, index);
+            }).join("") +
+          '</div>' +
         '</section>' +
         '<section class="roadmap">' +
           '<h3 class="roadmap-title">Скоро</h3>' +
@@ -87,16 +95,53 @@
         '</section>' +
       '</main>';
 
-    appRoot.querySelector('[data-action="start"]').addEventListener("click", function () {
-      if (hasProgress) {
-        startFrom(progress.stageIndex, progress.taskIndex);
-        return;
-      }
-      startFrom(0, 0);
+    Array.prototype.forEach.call(appRoot.querySelectorAll("[data-unit]"), function (button) {
+      button.addEventListener("click", function () {
+        var unitIndex = Number(button.getAttribute("data-unit"));
+        var unit = units[unitIndex];
+        var saved = isUnitComplete(unit.id) ? {} : getUnitProgress(unit.id);
+        startFrom(unitIndex, saved.stageIndex || 0, saved.taskIndex || 0);
+      });
     });
   }
 
-  function startFrom(stageIndex, taskIndex) {
+  function unitCard(unit, index) {
+    var complete = isUnitComplete(unit.id);
+    var progress = getUnitProgress(unit.id);
+    var hasProgress = !complete && typeof progress.stageIndex === "number";
+    var unlocked = isUnitUnlocked(index);
+    var status = "🔒";
+    var action = "";
+    var disabled = true;
+
+    if (unit.comingSoon) {
+      status = "Скоро";
+    } else if (complete) {
+      status = "✅ Готово";
+      action = "Ещё раз";
+      disabled = false;
+    } else if (unlocked && hasProgress) {
+      status = "Продолжить";
+      action = "Продолжить";
+      disabled = false;
+    } else if (unlocked) {
+      status = "Начать";
+      action = "Начать";
+      disabled = false;
+    }
+
+    return '<button class="unit-card" type="button" ' + (disabled ? "disabled" : 'data-unit="' + index + '"') + '>' +
+      '<span class="unit-icon">' + escapeHtml(unit.icon || "⭐") + '</span>' +
+      '<span class="unit-copy">' +
+        '<strong>' + escapeHtml(unit.title) + '</strong>' +
+        '<small>' + escapeHtml(status) + '</small>' +
+      '</span>' +
+      '<span class="unit-action">' + escapeHtml(action || status) + '</span>' +
+    '</button>';
+  }
+
+  function startFrom(unitIndex, stageIndex, taskIndex) {
+    position.unitIndex = unitIndex || 0;
     position.stageIndex = stageIndex || 0;
     position.taskIndex = taskIndex || 0;
     savePosition();
@@ -104,7 +149,8 @@
   }
 
   function renderStage() {
-    var stage = lesson.stages[position.stageIndex];
+    var unit = getCurrentUnit();
+    var stage = unit.stages[position.stageIndex];
 
     if (!stage) {
       renderFinish();
@@ -184,11 +230,16 @@
 
     if (stage.type === "mini-command-game") {
       window.LexiLandGames.renderMiniCommandGame(options);
+      return;
+    }
+
+    if (stage.type === "map-command-game") {
+      window.LexiLandGames.renderMapCommandGame(options);
     }
   }
 
   function nextTask() {
-    var stage = lesson.stages[position.stageIndex];
+    var stage = getCurrentUnit().stages[position.stageIndex];
     var count = stage.type === "intro" ? stage.items.length : stage.tasks.length;
 
     if (position.taskIndex < count - 1) {
@@ -205,7 +256,8 @@
   }
 
   function renderFinish() {
-    markComplete();
+    markUnitComplete();
+    var unit = getCurrentUnit();
 
     appRoot.innerHTML =
       renderLessonHeader("✅ Готово") +
@@ -213,6 +265,7 @@
         '<section class="stage-card finish-card">' +
           '<div class="intro-emoji" aria-hidden="true">✅</div>' +
           '<h2 class="big-russian">Готово</h2>' +
+          '<p class="unit-finish-title">' + escapeHtml(unit.title) + '</p>' +
           '<ul class="word-list">' +
             lesson.dictionary.filter(function (entry) {
               return entry.type === "word";
@@ -233,11 +286,12 @@
 
   function renderLessonHeader(title) {
     var percent = getProgressPercent();
+    var unit = getCurrentUnit();
     return '<header class="topbar">' +
       '<div class="brand">' +
         '<button class="home-button" type="button" onclick="LexiLandApp.home()" aria-label="Домой">⌂</button>' +
         '<div>' +
-          '<h2>Урок 1</h2>' +
+          '<h2>' + escapeHtml(unit.title) + '</h2>' +
           '<small>' + escapeHtml(title) + '</small>' +
         '</div>' +
       '</div>' +
@@ -252,7 +306,7 @@
     var total = getTotalCount();
     var done = 0;
 
-    lesson.stages.forEach(function (stage, index) {
+    getCurrentUnit().stages.forEach(function (stage, index) {
       var count = stage.type === "intro" ? stage.items.length : stage.tasks.length;
       if (index < position.stageIndex) {
         done += count;
@@ -266,9 +320,52 @@
   }
 
   function getTotalCount() {
-    return lesson.stages.reduce(function (sum, stage) {
+    return getCurrentUnit().stages.reduce(function (sum, stage) {
       return sum + (stage.type === "intro" ? stage.items.length : stage.tasks.length);
     }, 0);
+  }
+
+  function getUnits() {
+    if (lesson.units && lesson.units.length) {
+      return lesson.units;
+    }
+
+    return [
+      {
+        id: "unit-words",
+        title: "Слова",
+        icon: "🎧",
+        stages: lesson.stages || []
+      }
+    ].concat(lesson.extraUnits || []);
+  }
+
+  function getCurrentUnit() {
+    return getUnits()[position.unitIndex] || getUnits()[0];
+  }
+
+  function getLessonProgress() {
+    return getProgress()[lesson.id] || {};
+  }
+
+  function getUnitProgress(unitId) {
+    var lessonProgress = getLessonProgress();
+    var unitProgress = lessonProgress.units && lessonProgress.units[unitId];
+    return unitProgress || {};
+  }
+
+  function isUnitComplete(unitId) {
+    return Boolean(getUnitProgress(unitId).complete);
+  }
+
+  function isUnitUnlocked(index) {
+    var units = getUnits();
+
+    if (index === 0) {
+      return true;
+    }
+
+    return isUnitComplete(units[index - 1].id);
   }
 
   function gameHelpers() {
@@ -280,7 +377,16 @@
       escape: escapeHtml,
       playFeedback: playFeedback,
       playPrompt: playPrompt,
+      getMapAria: getMapAria,
+      getMapTarget: getMapTarget,
+      mapHeight: mapHeight,
+      mapObjectAt: mapObjectAt,
+      mapStart: mapStart,
+      mapTileClass: mapTileClass,
+      mapTileEmoji: mapTileEmoji,
+      mapWidth: mapWidth,
       scene: renderScene,
+      shuffle: shuffle,
       soundPanel: soundPanel
     };
   }
@@ -316,12 +422,153 @@
   }
 
   function playFeedback(kind) {
-    var feedback = lesson.feedbackAudio && lesson.feedbackAudio[kind];
+    var feedbackList = lesson.feedbackAudio && lesson.feedbackAudio[kind];
+    var feedback = chooseFeedback(feedbackList);
     if (!feedback) {
-      return;
+      return {
+        text: kind === "retry" ? "Ещё раз" : "Хорошо!"
+      };
     }
+
+    var variant = chooseFeedback(feedback.variants) || feedback;
+    if (!variant.audio) {
+      return feedback;
+    }
+
     setWarning("");
-    window.LexiLandAudio.playAudio(feedback.audio, feedback.text, setWarning);
+    window.LexiLandAudio.playAudio(variant.audio, feedback.text, setWarning);
+    return {
+      text: (feedback.emoji ? feedback.emoji + " " : "") + feedback.text
+    };
+  }
+
+  function chooseFeedback(options) {
+    if (!options) {
+      return null;
+    }
+
+    if (!Array.isArray(options)) {
+      return options;
+    }
+
+    if (!options.length) {
+      return null;
+    }
+
+    return options[Math.floor(Math.random() * options.length)];
+  }
+
+  function shuffle(items) {
+    var copy = items.slice();
+
+    for (var i = copy.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = copy[i];
+      copy[i] = copy[j];
+      copy[j] = temp;
+    }
+
+    return copy;
+  }
+
+  function getEntrySizeClass(text) {
+    if (text.length > 20) {
+      return " compact-text";
+    }
+
+    if (text.length > 13) {
+      return " medium-text";
+    }
+
+    return "";
+  }
+
+  function getMapObject(task, objectId) {
+    return (task.objects || []).filter(function (object) {
+      return object.id === objectId;
+    })[0];
+  }
+
+  function getMapTarget(task) {
+    if (task.target) {
+      return task.target;
+    }
+
+    var targetObject = getMapObject(task, task.correctTarget);
+    if (targetObject) {
+      return {
+        x: targetObject.x,
+        y: targetObject.y
+      };
+    }
+
+    return null;
+  }
+
+  function isMapTarget(task, x, y) {
+    var target = getMapTarget(task);
+
+    if (!target) {
+      return false;
+    }
+
+    return target.x === x && target.y === y;
+  }
+
+  function mapObjectAt(task, x, y) {
+    return (task.objects || []).filter(function (object) {
+      return object.x === x && object.y === y;
+    })[0];
+  }
+
+  function mapTileClass(task, x, y) {
+    var object = mapObjectAt(task, x, y);
+    if (object && object.kind) {
+      return " " + object.kind;
+    }
+
+    if (task.home && task.home.x === x && task.home.y === y) {
+      return " home-tile";
+    }
+
+    if (task.exit && task.exit.x === x && task.exit.y === y) {
+      return " exit-tile";
+    }
+
+    return "";
+  }
+
+  function mapTileEmoji(task, x, y) {
+    var object = mapObjectAt(task, x, y);
+    if (object) {
+      return object.emoji;
+    }
+
+    if (task.exit && task.exit.x === x && task.exit.y === y) {
+      return "🚪";
+    }
+
+    return "";
+  }
+
+  function mapStart(task) {
+    return task.start || { x: 0, y: 0 };
+  }
+
+  function mapWidth(task) {
+    return task.width || 5;
+  }
+
+  function mapHeight(task) {
+    return task.height || 5;
+  }
+
+  function getMapAria(task, x, y) {
+    if (isMapTarget(task, x, y)) {
+      return "цель";
+    }
+
+    return "";
   }
 
   function setWarning(message) {
@@ -333,7 +580,7 @@
 
   function entryButton(entryId) {
     var entry = maps.entries[entryId];
-    return '<button class="answer-card" type="button" data-answer="' + escapeHtml(entry.id) + '">' +
+    return '<button class="answer-card' + getEntrySizeClass(entry.text) + '" type="button" data-answer="' + escapeHtml(entry.id) + '">' +
       '<span class="answer-emoji" aria-hidden="true">' + escapeHtml(entry.emoji) + '</span>' +
       '<span class="answer-text">' + escapeHtml(entry.text) + '</span>' +
     '</button>';
@@ -395,20 +642,39 @@
   function savePosition() {
     var progress = getProgress();
     var existing = progress[lesson.id] || {};
+    var unit = getCurrentUnit();
+    var units = existing.units || {};
+    units[unit.id] = {
+      complete: Boolean(units[unit.id] && units[unit.id].complete),
+      completedAt: units[unit.id] && units[unit.id].completedAt,
+      stageIndex: position.stageIndex,
+      taskIndex: position.taskIndex
+    };
     progress[lesson.id] = {
       complete: Boolean(existing.complete),
       completedAt: existing.completedAt,
-      stageIndex: position.stageIndex,
-      taskIndex: position.taskIndex
+      units: units
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
   }
 
-  function markComplete() {
+  function markUnitComplete() {
     var progress = getProgress();
-    progress[lesson.id] = {
+    var existing = progress[lesson.id] || {};
+    var units = existing.units || {};
+    var unit = getCurrentUnit();
+    units[unit.id] = {
       complete: true,
       completedAt: new Date().toISOString()
+    };
+    progress[lesson.id] = {
+      complete: getUnits().filter(function (item) {
+        return !item.comingSoon;
+      }).every(function (item) {
+        return item.id === unit.id || Boolean(units[item.id] && units[item.id].complete);
+      }),
+      completedAt: new Date().toISOString(),
+      units: units
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
   }
@@ -449,6 +715,7 @@
       entry("dom", "дом", "🏠", "word", "dom.mp3"),
       entry("siniy", "синий", "🔵", "word", "siniy.mp3"),
       entry("krasniy", "красный", "🔴", "word", "krasniy.mp3"),
+      entry("zeleniy", "зелёный", "🟢", "word", "zeleniy.mp3"),
       entry("zdes_yabloko", "здесь яблоко", "📍🍎", "chunk", "zdes_yabloko.mp3"),
       entry("tam_yabloko", "там яблоко", "👉🍎", "chunk", "tam_yabloko.mp3"),
       entry("zdes_voda", "здесь вода", "📍💧", "chunk", "zdes_voda.mp3"),
@@ -468,7 +735,15 @@
       entry("eto_siniy_avtobus", "это синий автобус", "👀🔵🚌", "chunk", "eto_siniy_avtobus.mp3"),
       entry("eto_krasnoe_yabloko", "это красное яблоко", "👀🔴🍎", "chunk", "eto_krasnoe_yabloko.mp3"),
       entry("eto_siniy_dom", "это синий дом", "👀🔵🏠", "chunk", "eto_siniy_dom.mp3"),
-      entry("eto_krasniy_dom", "это красный дом", "👀🔴🏠", "chunk", "eto_krasniy_dom.mp3")
+      entry("eto_krasniy_dom", "это красный дом", "👀🔴🏠", "chunk", "eto_krasniy_dom.mp3"),
+      entry("idi_k_avtobusu", "иди к автобусу", "➡️🚌", "command", "idi_k_avtobusu.mp3"),
+      entry("naydi_zelyonoe_yabloko", "найди зелёное яблоко", "🟢🍎", "command", "naydi_zelyonoe_yabloko.mp3"),
+      entry("naydi_krasnye_yabloki", "найди красные яблоки", "🔴🍎🍎", "command", "naydi_krasnye_yabloki.mp3"),
+      entry("idi_v_dom", "иди в дом", "➡️🏠", "command", "idi_v_dom.mp3"),
+      entry("vyyidi_iz_doma", "выйди из дома", "🏠➡️", "command", "vyyidi_iz_doma.mp3"),
+      entry("idi_k_vode", "иди к воде", "➡️💧", "command", "idi_k_vode.mp3"),
+      entry("idi_k_sinemu_avtobusu", "иди к синему автобусу", "➡️🔵🚌", "command", "idi_k_sinemu_avtobusu.mp3"),
+      entry("idi_k_krasnomu_domu", "иди к красному дому", "➡️🔴🏠", "command", "idi_k_krasnomu_domu.mp3")
     ];
 
     var byId = {};
@@ -574,20 +849,59 @@
       return { id: id, emoji: emoji, zone: zone };
     }
 
+    function mapObj(id, emoji, x, y, kind) {
+      return { id: id, emoji: emoji, x: x, y: y, kind: kind || "" };
+    }
+
+    function mapTask(id, prompt, start, target, objects) {
+      return {
+        id: id,
+        text: byId[prompt].text,
+        audio: byId[prompt].audio,
+        width: 5,
+        height: 5,
+        start: start,
+        target: target,
+        objects: objects
+      };
+    }
+
+    function feedback(id, emoji, text) {
+      return {
+        id: id,
+        emoji: emoji,
+        text: text,
+        variants: [
+          { audio: audioRoot + "feedback_" + id + "_1.mp3", rate: "-6%", pitch: "+0Hz" },
+          { audio: audioRoot + "feedback_" + id + "_2.mp3", rate: "+0%", pitch: "+3Hz" },
+          { audio: audioRoot + "feedback_" + id + "_3.mp3", rate: "+5%", pitch: "+6Hz" }
+        ]
+      };
+    }
+
     return {
       lessons: [
         {
           id: "lesson-1",
           title: "Урок 1. Здесь, там, это",
           feedbackAudio: {
-            success: {
-              text: "Хорошо!",
-              audio: "assets/audio/ru/feedback_horosho.mp3"
-            },
-            retry: {
-              text: "Ещё раз",
-              audio: "assets/audio/ru/feedback_eshche_raz.mp3"
-            }
+            success: [
+              feedback("pravilno", "✅", "Правильно!"),
+              feedback("molodets", "🎉", "Молодец!"),
+              feedback("horosho", "👍", "Хорошо!"),
+              feedback("otlichno", "⭐", "Отлично!"),
+              feedback("verno", "😊", "Верно!"),
+              feedback("super", "🚀", "Супер!"),
+              feedback("idealno", "🏆", "Идеально!"),
+              feedback("vsyo_pravilno", "👏", "Всё правильно!"),
+              feedback("klass", "🔥", "Класс!"),
+              feedback("da_eto_verniy_otvet", "✅", "Да, это верный ответ!")
+            ],
+            retry: [
+              feedback("davay", "💪", "Давай!"),
+              feedback("eshche_raz", "↩️", "Ещё раз"),
+              feedback("poprobuy_eshche", "🙂", "Попробуй ещё")
+            ]
           },
           dictionary: dictionary,
           scenes: scenes,
@@ -714,6 +1028,75 @@
                 mini("mini-7", "eto_yabloko", [obj("near-bus", "🚌", "near"), obj("far-apple", "🍎", "far"), obj("far-house", "🏠", "far")], "far-apple", "no", 0),
                 mini("mini-8", "zdes_dva_yabloka", [obj("near-two-apples", "🍎🍎", "near"), obj("far-bus", "🚌", "far"), obj("far-water", "💧", "far")], "near-two-apples", "yes", 0)
               ]
+            }
+          ],
+          extraUnits: [
+            {
+              id: "unit-map-game",
+              title: "Игра",
+              icon: "🕹️",
+              stages: [
+                {
+                  type: "map-command-game",
+                  title: "Карта",
+                  tasks: [
+                    mapTask("map-1", "idi_k_avtobusu", { x: 0, y: 4 }, { x: 4, y: 3 }, [
+                      mapObj("bus", "🚌", 4, 3, "bus"),
+                      mapObj("water", "💧", 1, 1, "water"),
+                      mapObj("house", "🏠", 3, 0, "house")
+                    ]),
+                    mapTask("map-2", "naydi_zelyonoe_yabloko", { x: 2, y: 4 }, { x: 0, y: 1 }, [
+                      mapObj("green-apple", "🟢🍎", 0, 1, "apple"),
+                      mapObj("red-apple", "🔴🍎", 4, 1, "apple"),
+                      mapObj("bus", "🚌", 3, 3, "bus")
+                    ]),
+                    mapTask("map-3", "naydi_krasnye_yabloki", { x: 0, y: 4 }, { x: 3, y: 1 }, [
+                      mapObj("red-apples", "🔴🍎🍎", 3, 1, "apple"),
+                      mapObj("green-apple", "🟢🍎", 1, 2, "apple"),
+                      mapObj("house", "🏠", 4, 4, "house")
+                    ]),
+                    mapTask("map-4", "idi_v_dom", { x: 1, y: 4 }, { x: 2, y: 1 }, [
+                      mapObj("house", "🏠", 2, 1, "house"),
+                      mapObj("water", "💧", 0, 3, "water"),
+                      mapObj("apple", "🍎", 4, 4, "apple")
+                    ]),
+                    mapTask("map-5", "vyyidi_iz_doma", { x: 2, y: 1 }, { x: 2, y: 3 }, [
+                      mapObj("house", "🏠", 2, 1, "house"),
+                      mapObj("door", "🚪", 2, 3, "exit"),
+                      mapObj("bus", "🚌", 4, 2, "bus")
+                    ]),
+                    mapTask("map-6", "idi_k_vode", { x: 4, y: 4 }, { x: 1, y: 0 }, [
+                      mapObj("water", "💧", 1, 0, "water"),
+                      mapObj("red-apples", "🔴🍎🍎", 3, 2, "apple"),
+                      mapObj("house", "🏠", 0, 4, "house")
+                    ]),
+                    mapTask("map-7", "idi_k_sinemu_avtobusu", { x: 0, y: 0 }, { x: 4, y: 4 }, [
+                      mapObj("blue-bus", "🔵🚌", 4, 4, "bus"),
+                      mapObj("red-house", "🔴🏠", 1, 3, "house"),
+                      mapObj("green-apple", "🟢🍎", 3, 1, "apple")
+                    ]),
+                    mapTask("map-8", "idi_k_krasnomu_domu", { x: 4, y: 0 }, { x: 0, y: 3 }, [
+                      mapObj("red-house", "🔴🏠", 0, 3, "house"),
+                      mapObj("blue-bus", "🔵🚌", 2, 2, "bus"),
+                      mapObj("water", "💧", 4, 4, "water")
+                    ])
+                  ]
+                }
+              ]
+            },
+            {
+              id: "unit-text",
+              title: "Текст",
+              icon: "📖",
+              comingSoon: true,
+              stages: []
+            },
+            {
+              id: "unit-video",
+              title: "Видео",
+              icon: "🎬",
+              comingSoon: true,
+              stages: []
             }
           ]
         }

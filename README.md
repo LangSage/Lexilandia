@@ -22,6 +22,8 @@ The lesson includes:
 - 15 yes/no tasks.
 - 10 location tasks.
 - 8 final mini-game commands.
+- An unlockable 2D map game unit.
+- Empty text and video unit placeholders for later content.
 
 Learner-facing UI text is Russian only.
 
@@ -77,11 +79,15 @@ assets/audio/ru/tam_odin_avtobus.mp3
 
 The app uses real audio files first. If a file is missing, the learner can continue and the page shows `Аудио скоро будет`.
 
-Correct and retry feedback also use audio files:
+Correct and retry feedback use varied audio files. Each phrase has three generated intonation variants:
 
 ```text
-assets/audio/ru/feedback_horosho.mp3
-assets/audio/ru/feedback_eshche_raz.mp3
+assets/audio/ru/feedback_pravilno_1.mp3
+assets/audio/ru/feedback_pravilno_2.mp3
+assets/audio/ru/feedback_pravilno_3.mp3
+assets/audio/ru/feedback_davay_1.mp3
+assets/audio/ru/feedback_davay_2.mp3
+assets/audio/ru/feedback_davay_3.mp3
 ```
 
 Generate lesson audio with the production helper:
@@ -99,7 +105,7 @@ python tools/generate_audio.py --force
 python tools/generate_audio.py --voice ru-RU-DmitryNeural
 ```
 
-The generator reads `data/lessons.json`, finds every `audio` path, and creates missing `.mp3` files. It is a content-production script only; the website still has no build step and no runtime dependencies.
+The generator reads `data/lessons.json`, finds every `audio` path and feedback variant, and creates missing `.mp3` files. It is a content-production script only; the website still has no build step and no runtime dependencies.
 
 `js/audio.js` contains:
 
@@ -118,6 +124,7 @@ Main lesson pieces:
 - `dictionary`: words and chunks with Russian text, emoji, type, and audio path.
 - `scenes`: reusable emoji scenes for picture tasks.
 - `stages`: task lists for intro, tap, picture-choice, yes/no, location, and mini-command-game.
+- `extraUnits`: unlockable unit content such as the 2D map game, text, and video placeholders.
 
 To add a task, copy a nearby task in the same stage and change:
 

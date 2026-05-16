@@ -5,13 +5,14 @@
     var root = options.root;
     var task = options.task;
     var helpers = options.helpers;
+    var answers = helpers.shuffle(task.options);
     var canAnswer = true;
 
     root.innerHTML =
       helpers.soundPanel(task) +
       '<div id="picture-feedback" class="feedback" aria-live="polite"></div>' +
       '<div class="picture-grid">' +
-        task.options.map(function (sceneId) {
+        answers.map(function (sceneId) {
           return '<button class="scene-card" type="button" data-scene-answer="' + helpers.escape(sceneId) + '">' +
             helpers.scene(sceneId, true) +
           '</button>';
@@ -37,8 +38,7 @@
           canAnswer = false;
           button.classList.add("is-correct");
           feedback.className = "feedback good";
-          feedback.textContent = "Хорошо!";
-          helpers.playFeedback("success");
+          feedback.textContent = helpers.playFeedback("success").text;
           window.setTimeout(options.onCorrect, 900);
           return;
         }
@@ -46,8 +46,7 @@
         button.classList.add("is-wrong");
         correctButton.classList.add("show-correct");
         feedback.className = "feedback try";
-        feedback.textContent = "Ещё раз";
-        helpers.playFeedback("retry");
+        feedback.textContent = helpers.playFeedback("retry").text;
         window.setTimeout(function () {
           helpers.playPrompt(task);
         }, 760);
@@ -89,8 +88,7 @@
           canAnswer = false;
           button.classList.add("is-correct");
           feedback.className = "feedback good";
-          feedback.textContent = "Хорошо!";
-          helpers.playFeedback("success");
+          feedback.textContent = helpers.playFeedback("success").text;
           window.setTimeout(options.onCorrect, 900);
           return;
         }
@@ -98,8 +96,7 @@
         button.classList.add("is-wrong");
         correctButton.classList.add("show-correct");
         feedback.className = "feedback try";
-        feedback.textContent = "Ещё раз";
-        helpers.playFeedback("retry");
+        feedback.textContent = helpers.playFeedback("retry").text;
         window.setTimeout(function () {
           helpers.playPrompt(task);
         }, 760);
@@ -143,8 +140,7 @@
           canAnswer = false;
           button.classList.add("is-correct");
           feedback.className = "feedback good";
-          feedback.textContent = "Хорошо!";
-          helpers.playFeedback("success");
+          feedback.textContent = helpers.playFeedback("success").text;
           window.setTimeout(options.onCorrect, 900);
           return;
         }
@@ -152,8 +148,7 @@
         button.classList.add("is-wrong");
         correctButton.classList.add("show-correct");
         feedback.className = "feedback try";
-        feedback.textContent = "Ещё раз";
-        helpers.playFeedback("retry");
+        feedback.textContent = helpers.playFeedback("retry").text;
         window.setTimeout(function () {
           helpers.playPrompt(task);
         }, 760);

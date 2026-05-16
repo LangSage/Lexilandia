@@ -175,6 +175,66 @@ button {
   gap: 14px;
 }
 
+.unit-list {
+  display: grid;
+  gap: 10px;
+}
+
+.unit-card {
+  width: 100%;
+  min-height: 76px;
+  padding: 12px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--panel);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.unit-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.unit-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: #f3f8ff;
+  font-size: 1.9rem;
+}
+
+.unit-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.unit-copy strong {
+  font-size: 1.15rem;
+}
+
+.unit-copy small,
+.unit-action {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.unit-action {
+  padding: 7px 9px;
+  border-radius: 999px;
+  color: var(--blue-dark);
+  background: #e8f2ff;
+  white-space: nowrap;
+}
+
 .lesson-card h3,
 .stage-title,
 .roadmap-title {
@@ -288,20 +348,22 @@ button {
   border-radius: 8px;
   background: #e8f2ff;
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
+  grid-template-columns: 1fr;
+  align-items: start;
   gap: 10px;
 }
 
 .prompt-text {
   color: var(--blue-dark);
-  font-size: clamp(1.35rem, 7vw, 2rem);
+  font-size: 1.45rem;
   font-weight: 900;
   line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 .audio-button {
   min-width: 118px;
+  width: 100%;
   padding: 11px 13px;
   color: #ffffff;
   background: var(--blue);
@@ -322,7 +384,7 @@ button {
 
 .answer-card {
   width: 100%;
-  min-height: 92px;
+  min-height: 118px;
   padding: 13px;
   border: 2px solid var(--line);
   border-radius: 8px;
@@ -330,27 +392,43 @@ button {
   background: var(--panel);
   cursor: pointer;
   display: grid;
-  grid-template-columns: 62px 1fr;
+  grid-template-columns: 78px 1fr;
   align-items: center;
   gap: 14px;
   text-align: left;
+  overflow: hidden;
 }
 
 .answer-emoji {
-  width: 62px;
-  height: 62px;
+  width: 78px;
+  min-height: 78px;
+  padding: 5px;
   border-radius: 8px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   background: #f3f8ff;
-  font-size: 2.2rem;
+  font-size: 1.75rem;
+  line-height: 1;
+  overflow: visible;
 }
 
 .answer-text {
   color: var(--blue-dark);
-  font-size: clamp(1.55rem, 8vw, 2.45rem);
+  min-width: 0;
+  font-size: 1.4rem;
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.answer-card.medium-text .answer-text {
+  font-size: 1.18rem;
+}
+
+.answer-card.compact-text .answer-text {
+  font-size: 1.02rem;
 }
 
 .feedback {
@@ -396,12 +474,13 @@ button {
 
 .scene-card {
   width: 100%;
-  min-height: 170px;
+  min-height: 184px;
   padding: 10px;
   border: 2px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .scene {
@@ -556,6 +635,73 @@ button {
   gap: 8px;
 }
 
+.map-board {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: #dff0ff;
+}
+
+.map-tile {
+  aspect-ratio: 1;
+  min-height: 54px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  background: #f7fbff;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.map-tile.apple {
+  background: #f1ffe9;
+}
+
+.map-tile.water {
+  background: #e8f7ff;
+}
+
+.map-tile.bus {
+  background: #fff7e8;
+}
+
+.map-tile.house,
+.map-tile.home-tile {
+  background: #fff0e9;
+}
+
+.map-tile.exit {
+  background: #f6f2ff;
+}
+
+.show-target .map-tile.target-tile {
+  border-color: var(--green);
+  box-shadow: inset 0 0 0 2px rgba(24, 168, 111, 0.22);
+}
+
+.map-object {
+  font-size: 1.62rem;
+  line-height: 1;
+}
+
+.map-player {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.map-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
 .control-button {
   min-height: 64px;
   border: 2px solid var(--line);
@@ -627,5 +773,28 @@ button {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
+  }
+
+  .answer-text {
+    font-size: 1.5rem;
+  }
+
+  .answer-card.medium-text .answer-text {
+    font-size: 1.25rem;
+  }
+
+  .answer-card.compact-text .answer-text {
+    font-size: 1.08rem;
+  }
+}
+
+@media (min-width: 480px) {
+  .sound-panel {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .audio-button {
+    width: auto;
   }
 }

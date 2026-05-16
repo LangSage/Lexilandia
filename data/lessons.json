@@ -4,14 +4,296 @@
       "id": "lesson-1",
       "title": "Урок 1. Здесь, там, это",
       "feedbackAudio": {
-        "success": {
-          "text": "Хорошо!",
-          "audio": "assets/audio/ru/feedback_horosho.mp3"
-        },
-        "retry": {
-          "text": "Ещё раз",
-          "audio": "assets/audio/ru/feedback_eshche_raz.mp3"
-        }
+        "success": [
+          {
+            "id": "pravilno",
+            "emoji": "✅",
+            "text": "Правильно!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_pravilno_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_pravilno_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_pravilno_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "molodets",
+            "emoji": "🎉",
+            "text": "Молодец!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_molodets_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_molodets_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_molodets_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "horosho",
+            "emoji": "👍",
+            "text": "Хорошо!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_horosho_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_horosho_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_horosho_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "otlichno",
+            "emoji": "⭐",
+            "text": "Отлично!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_otlichno_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_otlichno_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_otlichno_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "verno",
+            "emoji": "😊",
+            "text": "Верно!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_verno_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_verno_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_verno_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "super",
+            "emoji": "🚀",
+            "text": "Супер!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_super_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_super_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_super_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "idealno",
+            "emoji": "🏆",
+            "text": "Идеально!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_idealno_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_idealno_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_idealno_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "vsyo_pravilno",
+            "emoji": "👏",
+            "text": "Всё правильно!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_vsyo_pravilno_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_vsyo_pravilno_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_vsyo_pravilno_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "klass",
+            "emoji": "🔥",
+            "text": "Класс!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_klass_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_klass_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_klass_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "da_eto_verniy_otvet",
+            "emoji": "✅",
+            "text": "Да, это верный ответ!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_da_eto_verniy_otvet_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_da_eto_verniy_otvet_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_da_eto_verniy_otvet_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          }
+        ],
+        "retry": [
+          {
+            "id": "davay",
+            "emoji": "💪",
+            "text": "Давай!",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_davay_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_davay_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_davay_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "eshche_raz",
+            "emoji": "↩️",
+            "text": "Ещё раз",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_eshche_raz_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_eshche_raz_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_eshche_raz_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          },
+          {
+            "id": "poprobuy_eshche",
+            "emoji": "🙂",
+            "text": "Попробуй ещё",
+            "variants": [
+              {
+                "audio": "assets/audio/ru/feedback_poprobuy_eshche_1.mp3",
+                "rate": "-6%",
+                "pitch": "+0Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_poprobuy_eshche_2.mp3",
+                "rate": "+0%",
+                "pitch": "+3Hz"
+              },
+              {
+                "audio": "assets/audio/ru/feedback_poprobuy_eshche_3.mp3",
+                "rate": "+5%",
+                "pitch": "+6Hz"
+              }
+            ]
+          }
+        ]
       },
       "dictionary": [
         {
@@ -104,6 +386,13 @@
           "emoji": "🔴",
           "type": "word",
           "audio": "assets/audio/ru/krasniy.mp3"
+        },
+        {
+          "id": "zeleniy",
+          "text": "зелёный",
+          "emoji": "🟢",
+          "type": "word",
+          "audio": "assets/audio/ru/zeleniy.mp3"
         },
         {
           "id": "zdes_yabloko",
@@ -244,6 +533,62 @@
           "emoji": "👀🔴🏠",
           "type": "chunk",
           "audio": "assets/audio/ru/eto_krasniy_dom.mp3"
+        },
+        {
+          "id": "idi_k_avtobusu",
+          "text": "иди к автобусу",
+          "emoji": "➡️🚌",
+          "type": "command",
+          "audio": "assets/audio/ru/idi_k_avtobusu.mp3"
+        },
+        {
+          "id": "naydi_zelyonoe_yabloko",
+          "text": "найди зелёное яблоко",
+          "emoji": "🟢🍎",
+          "type": "command",
+          "audio": "assets/audio/ru/naydi_zelyonoe_yabloko.mp3"
+        },
+        {
+          "id": "naydi_krasnye_yabloki",
+          "text": "найди красные яблоки",
+          "emoji": "🔴🍎🍎",
+          "type": "command",
+          "audio": "assets/audio/ru/naydi_krasnye_yabloki.mp3"
+        },
+        {
+          "id": "idi_v_dom",
+          "text": "иди в дом",
+          "emoji": "➡️🏠",
+          "type": "command",
+          "audio": "assets/audio/ru/idi_v_dom.mp3"
+        },
+        {
+          "id": "vyyidi_iz_doma",
+          "text": "выйди из дома",
+          "emoji": "🏠➡️",
+          "type": "command",
+          "audio": "assets/audio/ru/vyyidi_iz_doma.mp3"
+        },
+        {
+          "id": "idi_k_vode",
+          "text": "иди к воде",
+          "emoji": "➡️💧",
+          "type": "command",
+          "audio": "assets/audio/ru/idi_k_vode.mp3"
+        },
+        {
+          "id": "idi_k_sinemu_avtobusu",
+          "text": "иди к синему автобусу",
+          "emoji": "➡️🔵🚌",
+          "type": "command",
+          "audio": "assets/audio/ru/idi_k_sinemu_avtobusu.mp3"
+        },
+        {
+          "id": "idi_k_krasnomu_domu",
+          "text": "иди к красному дому",
+          "emoji": "➡️🔴🏠",
+          "type": "command",
+          "audio": "assets/audio/ru/idi_k_krasnomu_domu.mp3"
         }
       ],
       "scenes": [
@@ -1618,6 +1963,339 @@
               "startIndex": 0
             }
           ]
+        }
+      ],
+      "extraUnits": [
+        {
+          "id": "unit-map-game",
+          "title": "Игра",
+          "icon": "🕹️",
+          "stages": [
+            {
+              "type": "map-command-game",
+              "title": "Карта",
+              "tasks": [
+                {
+                  "id": "map-1",
+                  "text": "иди к автобусу",
+                  "audio": "assets/audio/ru/idi_k_avtobusu.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 0,
+                    "y": 4
+                  },
+                  "target": {
+                    "x": 4,
+                    "y": 3
+                  },
+                  "objects": [
+                    {
+                      "id": "bus",
+                      "emoji": "🚌",
+                      "x": 4,
+                      "y": 3,
+                      "kind": "bus"
+                    },
+                    {
+                      "id": "water",
+                      "emoji": "💧",
+                      "x": 1,
+                      "y": 1,
+                      "kind": "water"
+                    },
+                    {
+                      "id": "house",
+                      "emoji": "🏠",
+                      "x": 3,
+                      "y": 0,
+                      "kind": "house"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-2",
+                  "text": "найди зелёное яблоко",
+                  "audio": "assets/audio/ru/naydi_zelyonoe_yabloko.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 2,
+                    "y": 4
+                  },
+                  "target": {
+                    "x": 0,
+                    "y": 1
+                  },
+                  "objects": [
+                    {
+                      "id": "green-apple",
+                      "emoji": "🟢🍎",
+                      "x": 0,
+                      "y": 1,
+                      "kind": "apple"
+                    },
+                    {
+                      "id": "red-apple",
+                      "emoji": "🔴🍎",
+                      "x": 4,
+                      "y": 1,
+                      "kind": "apple"
+                    },
+                    {
+                      "id": "bus",
+                      "emoji": "🚌",
+                      "x": 3,
+                      "y": 3,
+                      "kind": "bus"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-3",
+                  "text": "найди красные яблоки",
+                  "audio": "assets/audio/ru/naydi_krasnye_yabloki.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 0,
+                    "y": 4
+                  },
+                  "target": {
+                    "x": 3,
+                    "y": 1
+                  },
+                  "objects": [
+                    {
+                      "id": "red-apples",
+                      "emoji": "🔴🍎🍎",
+                      "x": 3,
+                      "y": 1,
+                      "kind": "apple"
+                    },
+                    {
+                      "id": "green-apple",
+                      "emoji": "🟢🍎",
+                      "x": 1,
+                      "y": 2,
+                      "kind": "apple"
+                    },
+                    {
+                      "id": "house",
+                      "emoji": "🏠",
+                      "x": 4,
+                      "y": 4,
+                      "kind": "house"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-4",
+                  "text": "иди в дом",
+                  "audio": "assets/audio/ru/idi_v_dom.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 1,
+                    "y": 4
+                  },
+                  "target": {
+                    "x": 2,
+                    "y": 1
+                  },
+                  "objects": [
+                    {
+                      "id": "house",
+                      "emoji": "🏠",
+                      "x": 2,
+                      "y": 1,
+                      "kind": "house"
+                    },
+                    {
+                      "id": "water",
+                      "emoji": "💧",
+                      "x": 0,
+                      "y": 3,
+                      "kind": "water"
+                    },
+                    {
+                      "id": "apple",
+                      "emoji": "🍎",
+                      "x": 4,
+                      "y": 4,
+                      "kind": "apple"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-5",
+                  "text": "выйди из дома",
+                  "audio": "assets/audio/ru/vyyidi_iz_doma.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 2,
+                    "y": 1
+                  },
+                  "target": {
+                    "x": 2,
+                    "y": 3
+                  },
+                  "objects": [
+                    {
+                      "id": "house",
+                      "emoji": "🏠",
+                      "x": 2,
+                      "y": 1,
+                      "kind": "house"
+                    },
+                    {
+                      "id": "door",
+                      "emoji": "🚪",
+                      "x": 2,
+                      "y": 3,
+                      "kind": "exit"
+                    },
+                    {
+                      "id": "bus",
+                      "emoji": "🚌",
+                      "x": 4,
+                      "y": 2,
+                      "kind": "bus"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-6",
+                  "text": "иди к воде",
+                  "audio": "assets/audio/ru/idi_k_vode.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 4,
+                    "y": 4
+                  },
+                  "target": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "objects": [
+                    {
+                      "id": "water",
+                      "emoji": "💧",
+                      "x": 1,
+                      "y": 0,
+                      "kind": "water"
+                    },
+                    {
+                      "id": "red-apples",
+                      "emoji": "🔴🍎🍎",
+                      "x": 3,
+                      "y": 2,
+                      "kind": "apple"
+                    },
+                    {
+                      "id": "house",
+                      "emoji": "🏠",
+                      "x": 0,
+                      "y": 4,
+                      "kind": "house"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-7",
+                  "text": "иди к синему автобусу",
+                  "audio": "assets/audio/ru/idi_k_sinemu_avtobusu.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "target": {
+                    "x": 4,
+                    "y": 4
+                  },
+                  "objects": [
+                    {
+                      "id": "blue-bus",
+                      "emoji": "🔵🚌",
+                      "x": 4,
+                      "y": 4,
+                      "kind": "bus"
+                    },
+                    {
+                      "id": "red-house",
+                      "emoji": "🔴🏠",
+                      "x": 1,
+                      "y": 3,
+                      "kind": "house"
+                    },
+                    {
+                      "id": "green-apple",
+                      "emoji": "🟢🍎",
+                      "x": 3,
+                      "y": 1,
+                      "kind": "apple"
+                    }
+                  ]
+                },
+                {
+                  "id": "map-8",
+                  "text": "иди к красному дому",
+                  "audio": "assets/audio/ru/idi_k_krasnomu_domu.mp3",
+                  "width": 5,
+                  "height": 5,
+                  "start": {
+                    "x": 4,
+                    "y": 0
+                  },
+                  "target": {
+                    "x": 0,
+                    "y": 3
+                  },
+                  "objects": [
+                    {
+                      "id": "red-house",
+                      "emoji": "🔴🏠",
+                      "x": 0,
+                      "y": 3,
+                      "kind": "house"
+                    },
+                    {
+                      "id": "blue-bus",
+                      "emoji": "🔵🚌",
+                      "x": 2,
+                      "y": 2,
+                      "kind": "bus"
+                    },
+                    {
+                      "id": "water",
+                      "emoji": "💧",
+                      "x": 4,
+                      "y": 4,
+                      "kind": "water"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "unit-text",
+          "title": "Текст",
+          "icon": "📖",
+          "comingSoon": true,
+          "stages": []
+        },
+        {
+          "id": "unit-video",
+          "title": "Видео",
+          "icon": "🎬",
+          "comingSoon": true,
+          "stages": []
         }
       ]
     }
