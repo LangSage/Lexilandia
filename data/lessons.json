@@ -2394,6 +2394,1048 @@
           "stages": []
         }
       ]
+    },
+    {
+        "id": "lesson-2-gde-zdes-tam",
+        "order": 2,
+        "title": "Урок 2: Где? Здесь или там?",
+        "dictionary": [
+            {
+                "id": "gde",
+                "text": "где",
+                "emoji": "❓📍",
+                "type": "word",
+                "audio": "assets/audio/ru/gde.mp3"
+            },
+            {
+                "id": "ya",
+                "text": "я",
+                "emoji": "🙂👈",
+                "type": "word",
+                "audio": "assets/audio/ru/ya.mp3"
+            },
+            {
+                "id": "ty",
+                "text": "ты",
+                "emoji": "🙂👉",
+                "type": "word",
+                "audio": "assets/audio/ru/ty.mp3"
+            },
+            {
+                "id": "magazin",
+                "text": "магазин",
+                "emoji": "🏪",
+                "type": "word",
+                "audio": "assets/audio/ru/magazin.mp3"
+            },
+            {
+                "id": "park",
+                "text": "парк",
+                "emoji": "🌳",
+                "type": "word",
+                "audio": "assets/audio/ru/park.mp3"
+            },
+            {
+                "id": "metro",
+                "text": "метро",
+                "emoji": "🚇",
+                "type": "word",
+                "audio": "assets/audio/ru/metro.mp3"
+            },
+            {
+                "id": "kafe",
+                "text": "кафе",
+                "emoji": "☕",
+                "type": "word",
+                "audio": "assets/audio/ru/kafe.mp3"
+            },
+            {
+                "id": "zdes",
+                "text": "здесь",
+                "emoji": "📍",
+                "type": "word",
+                "audio": "assets/audio/ru/zdes.mp3"
+            },
+            {
+                "id": "tam",
+                "text": "там",
+                "emoji": "👈",
+                "type": "word",
+                "audio": "assets/audio/ru/tam.mp3"
+            },
+            {
+                "id": "eto",
+                "text": "это",
+                "emoji": "👉",
+                "type": "word",
+                "audio": "assets/audio/ru/eto.mp3"
+            },
+            {
+                "id": "da",
+                "text": "да",
+                "emoji": "✅",
+                "type": "word",
+                "audio": "assets/audio/ru/da.mp3"
+            },
+            {
+                "id": "net",
+                "text": "нет",
+                "emoji": "❌",
+                "type": "word",
+                "audio": "assets/audio/ru/net.mp3"
+            },
+            {
+                "id": "odin",
+                "text": "один",
+                "emoji": "1️⃣",
+                "type": "word",
+                "audio": "assets/audio/ru/odin.mp3"
+            },
+            {
+                "id": "dva",
+                "text": "два",
+                "emoji": "2️⃣",
+                "type": "word",
+                "audio": "assets/audio/ru/dva.mp3"
+            },
+            {
+                "id": "yabloko",
+                "text": "яблоко",
+                "emoji": "🍎",
+                "type": "word",
+                "audio": "assets/audio/ru/yabloko.mp3"
+            },
+            {
+                "id": "voda",
+                "text": "вода",
+                "emoji": "💧",
+                "type": "word",
+                "audio": "assets/audio/ru/voda.mp3"
+            },
+            {
+                "id": "avtobus",
+                "text": "автобус",
+                "emoji": "🚌",
+                "type": "word",
+                "audio": "assets/audio/ru/avtobus.mp3"
+            },
+            {
+                "id": "dom",
+                "text": "дом",
+                "emoji": "🏠",
+                "type": "word",
+                "audio": "assets/audio/ru/dom.mp3"
+            },
+            {
+                "id": "siniy",
+                "text": "синий",
+                "emoji": "🔵",
+                "type": "word",
+                "audio": "assets/audio/ru/siniy.mp3"
+            },
+            {
+                "id": "krasniy",
+                "text": "красный",
+                "emoji": "🔴",
+                "type": "word",
+                "audio": "assets/audio/ru/krasniy.mp3"
+            },
+            {
+                "id": "gde_ya",
+                "text": "Где я?",
+                "emoji": "❓🙂👈",
+                "type": "chunk",
+                "audio": "assets/audio/ru/gde_ya.mp3"
+            },
+            {
+                "id": "gde_ty",
+                "text": "Где ты?",
+                "emoji": "❓🙂👉",
+                "type": "chunk",
+                "audio": "assets/audio/ru/gde_ty.mp3"
+            },
+            {
+                "id": "ya_zdes",
+                "text": "Я здесь.",
+                "emoji": "🙂👈📍",
+                "type": "chunk",
+                "audio": "assets/audio/ru/ya_zdes.mp3"
+            },
+            {
+                "id": "ya_tam",
+                "text": "Я там.",
+                "emoji": "🙂👈👈",
+                "type": "chunk",
+                "audio": "assets/audio/ru/ya_tam.mp3"
+            },
+            {
+                "id": "ty_zdes",
+                "text": "Ты здесь.",
+                "emoji": "🙂👉📍",
+                "type": "chunk",
+                "audio": "assets/audio/ru/ty_zdes.mp3"
+            },
+            {
+                "id": "ty_tam",
+                "text": "Ты там.",
+                "emoji": "🙂👉👈",
+                "type": "chunk",
+                "audio": "assets/audio/ru/ty_tam.mp3"
+            },
+            {
+                "id": "eto_magazin",
+                "text": "Это магазин.",
+                "emoji": "👉🏪",
+                "type": "chunk",
+                "audio": "assets/audio/ru/eto_magazin.mp3"
+            },
+            {
+                "id": "eto_park",
+                "text": "Это парк.",
+                "emoji": "👉🌳",
+                "type": "chunk",
+                "audio": "assets/audio/ru/eto_park.mp3"
+            },
+            {
+                "id": "eto_metro",
+                "text": "Это метро.",
+                "emoji": "👉🚇",
+                "type": "chunk",
+                "audio": "assets/audio/ru/eto_metro.mp3"
+            },
+            {
+                "id": "eto_kafe",
+                "text": "Это кафе.",
+                "emoji": "👉☕",
+                "type": "chunk",
+                "audio": "assets/audio/ru/eto_kafe.mp3"
+            },
+            {
+                "id": "zdes_magazin",
+                "text": "Здесь магазин.",
+                "emoji": "📍🏪",
+                "type": "chunk",
+                "audio": "assets/audio/ru/zdes_magazin.mp3"
+            },
+            {
+                "id": "tam_magazin",
+                "text": "Там магазин.",
+                "emoji": "👈🏪",
+                "type": "chunk",
+                "audio": "assets/audio/ru/tam_magazin.mp3"
+            },
+            {
+                "id": "zdes_park",
+                "text": "Здесь парк.",
+                "emoji": "📍🌳",
+                "type": "chunk",
+                "audio": "assets/audio/ru/zdes_park.mp3"
+            },
+            {
+                "id": "tam_park",
+                "text": "Там парк.",
+                "emoji": "👈🌳",
+                "type": "chunk",
+                "audio": "assets/audio/ru/tam_park.mp3"
+            },
+            {
+                "id": "zdes_metro",
+                "text": "Здесь метро.",
+                "emoji": "📍🚇",
+                "type": "chunk",
+                "audio": "assets/audio/ru/zdes_metro.mp3"
+            },
+            {
+                "id": "tam_metro",
+                "text": "Там метро.",
+                "emoji": "👈🚇",
+                "type": "chunk",
+                "audio": "assets/audio/ru/tam_metro.mp3"
+            },
+            {
+                "id": "zdes_kafe",
+                "text": "Здесь кафе.",
+                "emoji": "📍☕",
+                "type": "chunk",
+                "audio": "assets/audio/ru/zdes_kafe.mp3"
+            },
+            {
+                "id": "tam_kafe",
+                "text": "Там кафе.",
+                "emoji": "👈☕",
+                "type": "chunk",
+                "audio": "assets/audio/ru/tam_kafe.mp3"
+            },
+            {
+                "id": "tam_avtobus",
+                "text": "Там автобус.",
+                "emoji": "👈🚌",
+                "type": "chunk",
+                "audio": "assets/audio/ru/tam_avtobus.mp3"
+            },
+            {
+                "id": "zdes_voda",
+                "text": "Здесь вода.",
+                "emoji": "📍💧",
+                "type": "chunk",
+                "audio": "assets/audio/ru/zdes_voda.mp3"
+            },
+            {
+                "id": "tam_yabloko",
+                "text": "Там яблоко.",
+                "emoji": "👈🍎",
+                "type": "chunk",
+                "audio": "assets/audio/ru/tam_yabloko.mp3"
+            },
+            {
+                "id": "zdes_voda_tam_yabloko",
+                "text": "Здесь вода. Там яблоко.",
+                "emoji": "📍💧👈🍎",
+                "type": "chunk",
+                "audio": "assets/audio/ru/zdes_voda_tam_yabloko.mp3"
+            },
+            {
+                "id": "text_2_full",
+                "text": "Я здесь. Ты там. Здесь кафе. Там магазин. Здесь вода. Там яблоко.",
+                "emoji": "🙂📍☕🏪💧🍎",
+                "type": "text",
+                "audio": "assets/audio/ru/text_2_full.mp3"
+            },
+            {
+                "id": "text_2_extra",
+                "text": "Это парк. Я здесь. Это метро. Ты там. Здесь один автобус. Там два дома.",
+                "emoji": "🌳📍🚇👈1️⃣🚌2️⃣🏠",
+                "type": "text",
+                "audio": "assets/audio/ru/text_2_extra.mp3"
+            },
+            {
+                "id": "otlichno",
+                "text": "Отлично!",
+                "emoji": "✅",
+                "type": "feedback",
+                "audio": "assets/audio/ru/otlichno.mp3"
+            }
+        ],
+        "scenes": [],
+        "units": [
+            {
+                "id": "unit-lesson-2-slides",
+                "title": "Урок 2",
+                "icon": "❓📍",
+                "stages": [
+                    {
+                        "type": "slides",
+                        "title": "Где?",
+                        "tasks": [
+                            {
+                                "id": "l2-slide-1",
+                                "title": "Урок 2",
+                                "text": [
+                                    "Где?",
+                                    "📍❓"
+                                ],
+                                "visual": {
+                                    "type": "emoji",
+                                    "emoji": "📍❓"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Урок 2",
+                                        "audio": "assets/audio/ru/urok_2.mp3"
+                                    },
+                                    {
+                                        "text": "где",
+                                        "audio": "assets/audio/ru/gde.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-2",
+                                "text": [
+                                    "здесь 📍",
+                                    "там 👈"
+                                ],
+                                "visual": {
+                                    "type": "here-there"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "здесь",
+                                        "audio": "assets/audio/ru/zdes.mp3"
+                                    },
+                                    {
+                                        "text": "там",
+                                        "audio": "assets/audio/ru/tam.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-3",
+                                "text": [
+                                    "где? ❓📍",
+                                    "Где?"
+                                ],
+                                "visual": {
+                                    "type": "person-question"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "где",
+                                        "audio": "assets/audio/ru/gde.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-4",
+                                "text": [
+                                    "я 🙂👈",
+                                    "Я здесь."
+                                ],
+                                "visual": {
+                                    "type": "self-here"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "я",
+                                        "audio": "assets/audio/ru/ya.mp3"
+                                    },
+                                    {
+                                        "text": "Я здесь.",
+                                        "audio": "assets/audio/ru/ya_zdes.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-5",
+                                "text": [
+                                    "ты 🙂👉",
+                                    "Ты там."
+                                ],
+                                "visual": {
+                                    "type": "you-there"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "ты",
+                                        "audio": "assets/audio/ru/ty.mp3"
+                                    },
+                                    {
+                                        "text": "Ты там.",
+                                        "audio": "assets/audio/ru/ty_tam.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-6",
+                                "text": [
+                                    "Где я?"
+                                ],
+                                "visual": {
+                                    "type": "self-here"
+                                },
+                                "reveal": {
+                                    "text": "Я здесь.",
+                                    "audio": "assets/audio/ru/ya_zdes.mp3"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Где я?",
+                                        "audio": "assets/audio/ru/gde_ya.mp3"
+                                    }
+                                ],
+                                "questions": [
+                                    {
+                                        "id": "l2-q6",
+                                        "text": "Где я?",
+                                        "options": [
+                                            {
+                                                "id": "ya_zdes",
+                                                "text": "Я здесь.",
+                                                "emoji": "🙂👈📍"
+                                            },
+                                            {
+                                                "id": "ya_tam",
+                                                "text": "Я там.",
+                                                "emoji": "🙂👈👈"
+                                            }
+                                        ],
+                                        "correct": "ya_zdes"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-7",
+                                "text": [
+                                    "Где ты?"
+                                ],
+                                "visual": {
+                                    "type": "you-there"
+                                },
+                                "reveal": {
+                                    "text": "Ты там.",
+                                    "audio": "assets/audio/ru/ty_tam.mp3"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Где ты?",
+                                        "audio": "assets/audio/ru/gde_ty.mp3"
+                                    },
+                                    {
+                                        "text": "Ты там.",
+                                        "audio": "assets/audio/ru/ty_tam.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-8",
+                                "text": [
+                                    "магазин 🏪",
+                                    "Это магазин."
+                                ],
+                                "visual": {
+                                    "type": "focus",
+                                    "items": [
+                                        "🏪"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "магазин",
+                                        "audio": "assets/audio/ru/magazin.mp3"
+                                    },
+                                    {
+                                        "text": "Это магазин.",
+                                        "audio": "assets/audio/ru/eto_magazin.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-9",
+                                "text": [
+                                    "парк 🌳",
+                                    "Это парк."
+                                ],
+                                "visual": {
+                                    "type": "focus",
+                                    "items": [
+                                        "🌳"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "парк",
+                                        "audio": "assets/audio/ru/park.mp3"
+                                    },
+                                    {
+                                        "text": "Это парк.",
+                                        "audio": "assets/audio/ru/eto_park.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-10",
+                                "text": [
+                                    "метро 🚇",
+                                    "Это метро."
+                                ],
+                                "visual": {
+                                    "type": "focus",
+                                    "items": [
+                                        "🚇"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "метро",
+                                        "audio": "assets/audio/ru/metro.mp3"
+                                    },
+                                    {
+                                        "text": "Это метро.",
+                                        "audio": "assets/audio/ru/eto_metro.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-11",
+                                "text": [
+                                    "кафе ☕",
+                                    "Это кафе."
+                                ],
+                                "visual": {
+                                    "type": "focus",
+                                    "items": [
+                                        "☕"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "кафе",
+                                        "audio": "assets/audio/ru/kafe.mp3"
+                                    },
+                                    {
+                                        "text": "Это кафе.",
+                                        "audio": "assets/audio/ru/eto_kafe.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-12",
+                                "text": [
+                                    "Здесь магазин."
+                                ],
+                                "visual": {
+                                    "type": "scene",
+                                    "near": [
+                                        "🏪"
+                                    ],
+                                    "far": []
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Здесь магазин.",
+                                        "audio": "assets/audio/ru/zdes_magazin.mp3"
+                                    }
+                                ],
+                                "questions": [
+                                    {
+                                        "id": "l2-q12",
+                                        "text": "Здесь магазин?",
+                                        "options": [
+                                            {
+                                                "id": "da",
+                                                "text": "да",
+                                                "emoji": "✅"
+                                            },
+                                            {
+                                                "id": "net",
+                                                "text": "нет",
+                                                "emoji": "❌"
+                                            }
+                                        ],
+                                        "correct": "da"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-13",
+                                "text": [
+                                    "Там парк."
+                                ],
+                                "visual": {
+                                    "type": "scene",
+                                    "near": [],
+                                    "far": [
+                                        "🌳"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Там парк.",
+                                        "audio": "assets/audio/ru/tam_park.mp3"
+                                    }
+                                ],
+                                "questions": [
+                                    {
+                                        "id": "l2-q13",
+                                        "text": "Там парк?",
+                                        "options": [
+                                            {
+                                                "id": "da",
+                                                "text": "да",
+                                                "emoji": "✅"
+                                            },
+                                            {
+                                                "id": "net",
+                                                "text": "нет",
+                                                "emoji": "❌"
+                                            }
+                                        ],
+                                        "correct": "da"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-14",
+                                "text": [
+                                    "Там автобус."
+                                ],
+                                "visual": {
+                                    "type": "scene",
+                                    "near": [],
+                                    "far": [
+                                        "🚌"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Там автобус.",
+                                        "audio": "assets/audio/ru/tam_avtobus.mp3"
+                                    }
+                                ],
+                                "questions": [
+                                    {
+                                        "id": "l2-q14",
+                                        "text": "Где автобус?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "tam"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-15",
+                                "text": [
+                                    "Здесь вода.",
+                                    "Там яблоко."
+                                ],
+                                "visual": {
+                                    "type": "scene",
+                                    "near": [
+                                        "💧"
+                                    ],
+                                    "far": [
+                                        "🍎"
+                                    ]
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Здесь вода.",
+                                        "audio": "assets/audio/ru/zdes_voda.mp3"
+                                    },
+                                    {
+                                        "text": "Там яблоко.",
+                                        "audio": "assets/audio/ru/tam_yabloko.mp3"
+                                    },
+                                    {
+                                        "text": "Здесь вода. Там яблоко.",
+                                        "audio": "assets/audio/ru/zdes_voda_tam_yabloko.mp3"
+                                    }
+                                ],
+                                "questions": [
+                                    {
+                                        "id": "l2-q15",
+                                        "text": "Где вода?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "zdes"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-16",
+                                "text": [
+                                    "Я здесь.",
+                                    "Ты там.",
+                                    "",
+                                    "Здесь кафе.",
+                                    "Там магазин.",
+                                    "",
+                                    "Здесь вода.",
+                                    "Там яблоко."
+                                ],
+                                "reading": true,
+                                "wordMeanings": {
+                                    "я": "🙂👈",
+                                    "здесь": "📍",
+                                    "ты": "🙂👉",
+                                    "там": "👈",
+                                    "кафе": "☕",
+                                    "магазин": "🏪",
+                                    "вода": "💧",
+                                    "яблоко": "🍎"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Я здесь. Ты там. Здесь кафе. Там магазин. Здесь вода. Там яблоко.",
+                                        "audio": "assets/audio/ru/text_2_full.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-17",
+                                "text": [
+                                    "Я здесь.",
+                                    "Ты там.",
+                                    "Здесь кафе.",
+                                    "Там магазин.",
+                                    "Здесь вода.",
+                                    "Там яблоко."
+                                ],
+                                "visual": {
+                                    "type": "scene",
+                                    "near": [
+                                        "☕",
+                                        "💧"
+                                    ],
+                                    "far": [
+                                        "🏪",
+                                        "🍎"
+                                    ]
+                                },
+                                "questions": [
+                                    {
+                                        "id": "l2-q17-1",
+                                        "text": "Где я?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "zdes"
+                                    },
+                                    {
+                                        "id": "l2-q17-2",
+                                        "text": "Где ты?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "tam"
+                                    },
+                                    {
+                                        "id": "l2-q17-3",
+                                        "text": "Что здесь?",
+                                        "options": [
+                                            {
+                                                "id": "kafe",
+                                                "text": "кафе",
+                                                "emoji": "☕"
+                                            },
+                                            {
+                                                "id": "magazin",
+                                                "text": "магазин",
+                                                "emoji": "🏪"
+                                            }
+                                        ],
+                                        "correct": "kafe"
+                                    },
+                                    {
+                                        "id": "l2-q17-4",
+                                        "text": "Что там?",
+                                        "options": [
+                                            {
+                                                "id": "magazin",
+                                                "text": "магазин",
+                                                "emoji": "🏪"
+                                            },
+                                            {
+                                                "id": "kafe",
+                                                "text": "кафе",
+                                                "emoji": "☕"
+                                            }
+                                        ],
+                                        "correct": "magazin"
+                                    },
+                                    {
+                                        "id": "l2-q17-5",
+                                        "text": "Где вода?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "zdes"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-18",
+                                "text": [
+                                    "Это парк.",
+                                    "Я здесь.",
+                                    "",
+                                    "Это метро.",
+                                    "Ты там.",
+                                    "",
+                                    "Здесь один автобус.",
+                                    "Там два дома."
+                                ],
+                                "reading": true,
+                                "wordMeanings": {
+                                    "это": "👉",
+                                    "парк": "🌳",
+                                    "я": "🙂👈",
+                                    "здесь": "📍",
+                                    "метро": "🚇",
+                                    "ты": "🙂👉",
+                                    "там": "👈",
+                                    "один": "1️⃣",
+                                    "автобус": "🚌",
+                                    "два": "2️⃣",
+                                    "дома": "🏠"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Это парк. Я здесь. Это метро. Ты там. Здесь один автобус. Там два дома.",
+                                        "audio": "assets/audio/ru/text_2_extra.mp3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-19",
+                                "text": [
+                                    "Где?"
+                                ],
+                                "visual": {
+                                    "type": "scene",
+                                    "near": [
+                                        "🏪",
+                                        "🚇"
+                                    ],
+                                    "far": [
+                                        "🌳",
+                                        "🚌"
+                                    ]
+                                },
+                                "questions": [
+                                    {
+                                        "id": "l2-q19-1",
+                                        "text": "Где магазин?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "zdes"
+                                    },
+                                    {
+                                        "id": "l2-q19-2",
+                                        "text": "Где парк?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "tam"
+                                    },
+                                    {
+                                        "id": "l2-q19-3",
+                                        "text": "Где метро?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "zdes"
+                                    },
+                                    {
+                                        "id": "l2-q19-4",
+                                        "text": "Где автобус?",
+                                        "options": [
+                                            {
+                                                "id": "zdes",
+                                                "text": "здесь",
+                                                "emoji": "📍"
+                                            },
+                                            {
+                                                "id": "tam",
+                                                "text": "там",
+                                                "emoji": "👈"
+                                            }
+                                        ],
+                                        "correct": "tam"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "l2-slide-20",
+                                "text": [
+                                    "Отлично! ✅",
+                                    "Я здесь.",
+                                    "Ты там.",
+                                    "Где?"
+                                ],
+                                "visual": {
+                                    "type": "emoji",
+                                    "emoji": "✅📍❓"
+                                },
+                                "audio": [
+                                    {
+                                        "text": "Отлично!",
+                                        "audio": "assets/audio/ru/otlichno.mp3"
+                                    },
+                                    {
+                                        "text": "Я здесь.",
+                                        "audio": "assets/audio/ru/ya_zdes.mp3"
+                                    },
+                                    {
+                                        "text": "Ты там.",
+                                        "audio": "assets/audio/ru/ty_tam.mp3"
+                                    },
+                                    {
+                                        "text": "где",
+                                        "audio": "assets/audio/ru/gde.mp3"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
   ]
 }

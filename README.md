@@ -10,7 +10,7 @@ The app is intentionally simple:
 - Progress saved in `localStorage`.
 - Natural audio-first design using normal `<audio>` playback.
 
-## Current Lesson
+## Current Lessons
 
 Lesson 1: `Урок 1. Здесь, там, это`
 
@@ -24,6 +24,16 @@ The lesson includes:
 - 8 final mini-game commands.
 - An unlockable 2D map game unit.
 - Empty text and video unit placeholders for later content.
+
+Lesson 2: `Урок 2: Где? Здесь или там?`
+
+The lesson includes:
+
+- 20 focused slide tasks.
+- Location words and simple places.
+- Clickable micro-reading words.
+- Yes/no and здесь/там checks.
+- Audio references for every new word, phrase, and reading.
 
 Learner-facing UI text is Russian only.
 
@@ -43,7 +53,7 @@ Then open:
 http://localhost:8000
 ```
 
-If a browser blocks `data/lessons.json` when opened directly from disk, `js/app.js` includes a matching fallback lesson so the app still works from `index.html`.
+If a browser blocks `data/lessons.json` when opened directly from disk, `js/app.js` includes fallback lesson data so the app still works from `index.html`.
 
 ## Publish On GitHub Pages
 
@@ -123,7 +133,7 @@ Main lesson pieces:
 
 - `dictionary`: words and chunks with Russian text, emoji, type, and audio path.
 - `scenes`: reusable emoji scenes for picture tasks.
-- `stages`: task lists for intro, tap, picture-choice, yes/no, location, and mini-command-game.
+- `stages`: task lists for intro, tap, picture-choice, yes/no, location, mini-command-game, map-command-game, and slides.
 - `extraUnits`: unlockable unit content such as the 2D map game, text, and video placeholders.
 
 To add a task, copy a nearby task in the same stage and change:
@@ -149,4 +159,4 @@ Progress is stored in `localStorage` under:
 lexiland-russian-progress-v2
 ```
 
-The home screen shows completion for Lesson 1 after the finish screen is reached.
+The home screen shows completion for each lesson after its finish screen is reached.

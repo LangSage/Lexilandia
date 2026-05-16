@@ -10,6 +10,7 @@
     scenes: {}
   };
   var position = {
+    lessonIndex: 0,
     unitIndex: 0,
     stageIndex: 0,
     taskIndex: 0
@@ -20,8 +21,7 @@
   function init() {
     loadLessonData().then(function (loadedData) {
       data = loadedData;
-      lesson = data.lessons[0];
-      createMaps();
+      setCurrentLesson(0);
       renderHome();
     });
   }
@@ -43,22 +43,23 @@
     maps.entries = {};
     maps.scenes = {};
 
-    lesson.dictionary.forEach(function (entry) {
+    (lesson.dictionary || []).forEach(function (entry) {
       maps.entries[entry.id] = entry;
     });
 
-    lesson.scenes.forEach(function (scene) {
+    (lesson.scenes || []).forEach(function (scene) {
       maps.scenes[scene.id] = scene;
     });
   }
 
+  function setCurrentLesson(index) {
+    position.lessonIndex = index || 0;
+    lesson = (data.lessons || [])[position.lessonIndex] || data.lessons[0];
+    createMaps();
+  }
+
   function renderHome() {
-    var units = getUnits();
-    var complete = units.filter(function (unit) {
-      return !unit.comingSoon;
-    }).every(function (unit) {
-      return isUnitComplete(unit.id);
-    });
+    var lessons = data.lessons || [];
 
     appRoot.innerHTML =
       '<main class="screen">' +
@@ -75,17 +76,11 @@
           '<p class="hero-word">здесь</p>' +
           '<p class="emoji-line">📍 🍎 💧 🚌 🏠</p>' +
         '</section>' +
-        '<section class="lesson-card">' +
-          '<div class="pill-row">' +
-            '<span class="pill">' + (complete ? "Урок 1 ✅" : "Урок 1") + '</span>' +
-          '</div>' +
-          '<h3>' + escapeHtml(lesson.title) + '</h3>' +
-          '<div class="unit-list">' +
-            units.map(function (unit, index) {
-              return unitCard(unit, index);
-            }).join("") +
-          '</div>' +
-        '</section>' +
+        '<div class="lesson-list">' +
+          lessons.map(function (item, lessonIndex) {
+            return lessonCard(item, lessonIndex);
+          }).join("") +
+        '</div>' +
         '<section class="roadmap">' +
           '<h3 class="roadmap-title">Скоро</h3>' +
           '<div class="roadmap-card">' +
@@ -97,19 +92,40 @@
 
     Array.prototype.forEach.call(appRoot.querySelectorAll("[data-unit]"), function (button) {
       button.addEventListener("click", function () {
+        var lessonIndex = Number(button.getAttribute("data-lesson"));
         var unitIndex = Number(button.getAttribute("data-unit"));
-        var unit = units[unitIndex];
+        setCurrentLesson(lessonIndex);
+        var unit = getUnits()[unitIndex];
         var saved = isUnitComplete(unit.id) ? {} : getUnitProgress(unit.id);
         startFrom(unitIndex, saved.stageIndex || 0, saved.taskIndex || 0);
       });
     });
   }
 
-  function unitCard(unit, index) {
-    var complete = isUnitComplete(unit.id);
-    var progress = getUnitProgress(unit.id);
+  function lessonCard(item, lessonIndex) {
+    var units = getUnits(item);
+    var complete = isLessonComplete(item);
+    var unlocked = isLessonUnlocked(lessonIndex);
+    var label = "Урок " + (item.order || lessonIndex + 1) + (complete ? " ✅" : "");
+
+    return '<section class="lesson-card">' +
+      '<div class="pill-row">' +
+        '<span class="pill' + (complete ? " done" : "") + '">' + escapeHtml(unlocked ? label : label + " 🔒") + '</span>' +
+      '</div>' +
+      '<h3>' + escapeHtml(item.title) + '</h3>' +
+      '<div class="unit-list">' +
+        units.map(function (unit, unitIndex) {
+          return unitCard(unit, unitIndex, item, lessonIndex, unlocked);
+        }).join("") +
+      '</div>' +
+    '</section>';
+  }
+
+  function unitCard(unit, index, targetLesson, lessonIndex, lessonUnlocked) {
+    var complete = isUnitComplete(unit.id, targetLesson);
+    var progress = getUnitProgress(unit.id, targetLesson);
     var hasProgress = !complete && typeof progress.stageIndex === "number";
-    var unlocked = isUnitUnlocked(index);
+    var unlocked = lessonUnlocked && isUnitUnlocked(index, targetLesson);
     var status = "🔒";
     var action = "";
     var disabled = true;
@@ -130,7 +146,7 @@
       disabled = false;
     }
 
-    return '<button class="unit-card" type="button" ' + (disabled ? "disabled" : 'data-unit="' + index + '"') + '>' +
+    return '<button class="unit-card" type="button" ' + (disabled ? "disabled" : 'data-lesson="' + lessonIndex + '" data-unit="' + index + '"') + '>' +
       '<span class="unit-icon">' + escapeHtml(unit.icon || "⭐") + '</span>' +
       '<span class="unit-copy">' +
         '<strong>' + escapeHtml(unit.title) + '</strong>' +
@@ -194,6 +210,22 @@
 
   function renderGameStage(stage) {
     var task = stage.tasks[position.taskIndex];
+
+    if (stage.type === "slides") {
+      appRoot.innerHTML =
+        renderLessonHeader(stage.title) +
+        '<main class="lesson-screen">' +
+          '<div id="game-root" class="slide-stage-root"></div>' +
+        '</main>';
+
+      window.LexiLandGames.renderSlideLesson({
+        root: document.getElementById("game-root"),
+        task: task,
+        helpers: gameHelpers(),
+        onCorrect: nextTask
+      });
+      return;
+    }
 
     appRoot.innerHTML =
       renderLessonHeader(stage.title) +
@@ -327,9 +359,11 @@
     }, 0);
   }
 
-  function getUnits() {
-    if (lesson.units && lesson.units.length) {
-      return lesson.units;
+  function getUnits(targetLesson) {
+    var source = targetLesson || lesson;
+
+    if (source.units && source.units.length) {
+      return source.units;
     }
 
     return [
@@ -337,37 +371,46 @@
         id: "unit-words",
         title: "Слова",
         icon: "🎧",
-        stages: lesson.stages || []
+        stages: source.stages || []
       }
-    ].concat(lesson.extraUnits || []);
+    ].concat(source.extraUnits || []);
   }
 
   function getCurrentUnit() {
     return getUnits()[position.unitIndex] || getUnits()[0];
   }
 
-  function getLessonProgress() {
-    return getProgress()[lesson.id] || {};
+  function getLessonProgress(targetLesson) {
+    var source = targetLesson || lesson;
+    return getProgress()[source.id] || {};
   }
 
-  function getUnitProgress(unitId) {
-    var lessonProgress = getLessonProgress();
+  function getUnitProgress(unitId, targetLesson) {
+    var lessonProgress = getLessonProgress(targetLesson);
     var unitProgress = lessonProgress.units && lessonProgress.units[unitId];
     return unitProgress || {};
   }
 
-  function isUnitComplete(unitId) {
-    return Boolean(getUnitProgress(unitId).complete);
+  function isUnitComplete(unitId, targetLesson) {
+    return Boolean(getUnitProgress(unitId, targetLesson).complete);
   }
 
-  function isUnitUnlocked(index) {
-    var units = getUnits();
+  function isUnitUnlocked(index, targetLesson) {
+    var units = getUnits(targetLesson);
 
     if (index === 0) {
       return true;
     }
 
-    return isUnitComplete(units[index - 1].id);
+    return isUnitComplete(units[index - 1].id, targetLesson);
+  }
+
+  function isLessonComplete(targetLesson) {
+    return Boolean(getLessonProgress(targetLesson).complete);
+  }
+
+  function isLessonUnlocked(index) {
+    return true;
   }
 
   function gameHelpers() {
@@ -380,6 +423,7 @@
       afterFeedback: afterFeedback,
       playFeedback: playFeedback,
       playPrompt: playPrompt,
+      playAudioList: playAudioList,
       getMapAria: getMapAria,
       getMapTarget: getMapTarget,
       mapHeight: mapHeight,
@@ -432,7 +476,13 @@
 
   function playPrompt(task) {
     setWarning("");
-    window.LexiLandAudio.playAudio(task.audio, task.text, setWarning);
+    if (!task.audio) {
+      return Promise.resolve(false);
+    }
+    if (Array.isArray(task.audio)) {
+      return playAudioList(task.audio);
+    }
+    return window.LexiLandAudio.playAudio(task.audio, task.text, setWarning);
   }
 
   function playEntry(entry) {
@@ -440,8 +490,25 @@
     window.LexiLandAudio.playAudio(entry.audio, entry.text, setWarning);
   }
 
+  function playAudioList(items) {
+    var queue = (items || []).slice();
+    var chain = Promise.resolve(false);
+
+    queue.forEach(function (item) {
+      chain = chain.then(function () {
+        return window.LexiLandAudio.playAudio(item.audio, item.text, setWarning);
+      });
+    });
+
+    return chain;
+  }
+
   function playFeedback(kind) {
     var feedbackList = lesson.feedbackAudio && lesson.feedbackAudio[kind];
+    var sharedFeedback = data.lessons && data.lessons[0] && data.lessons[0].feedbackAudio;
+    if (!feedbackList && sharedFeedback) {
+      feedbackList = sharedFeedback[kind];
+    }
     var feedback = chooseFeedback(feedbackList);
     if (!feedback) {
       return {
@@ -1143,7 +1210,7 @@
             }
           ]
         }
-      ]
+      ].concat(window.LexiLandLesson2 ? [window.LexiLandLesson2] : [])
     };
   }
 

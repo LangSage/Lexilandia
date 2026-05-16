@@ -63,8 +63,7 @@ def load_audio_lines() -> list[AudioLine]:
 
         for stage in iter_stages(lesson):
             for task in stage.get("tasks", []):
-                if task.get("text") and task.get("audio"):
-                    add_line(lines, task["text"], task["audio"])
+                collect_audio(lines, task)
 
     return sorted(lines.values(), key=lambda line: str(line.path))
 
@@ -98,6 +97,28 @@ def add_line(
 ) -> None:
     target = ROOT / audio_path
     lines[str(target)] = AudioLine(text=text, path=target, rate=rate, pitch=pitch)
+
+
+def collect_audio(lines: dict[str, AudioLine], value: object, fallback_text: str = "") -> None:
+    if isinstance(value, dict):
+        text = str(value.get("text") or fallback_text)
+        audio_value = value.get("audio")
+
+        if isinstance(audio_value, str) and text:
+            add_line(lines, text, audio_value)
+
+        if isinstance(audio_value, list):
+            for item in audio_value:
+                collect_audio(lines, item, text)
+
+        for key, child in value.items():
+            if key != "audio":
+                collect_audio(lines, child, text)
+        return
+
+    if isinstance(value, list):
+        for item in value:
+            collect_audio(lines, item, fallback_text)
 
 
 async def generate_with_edge_tts(
