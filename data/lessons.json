@@ -479,29 +479,29 @@
           "audio": "assets/audio/ru/eto_dom.mp3"
         },
         {
-          "id": "zdes_odin_yabloko",
-          "text": "здесь 1 яблоко",
+          "id": "zdes_odno_yabloko",
+          "text": "здесь одно яблоко",
           "emoji": "📍1️⃣🍎",
           "type": "chunk",
-          "audio": "assets/audio/ru/zdes_odin_yabloko.mp3"
+          "audio": "assets/audio/ru/zdes_odno_yabloko.mp3"
         },
         {
           "id": "zdes_dva_yabloka",
-          "text": "здесь 2 яблока",
+          "text": "здесь два яблока",
           "emoji": "📍2️⃣🍎",
           "type": "chunk",
           "audio": "assets/audio/ru/zdes_dva_yabloka.mp3"
         },
         {
           "id": "tam_odin_avtobus",
-          "text": "там 1 автобус",
+          "text": "там один автобус",
           "emoji": "👉1️⃣🚌",
           "type": "chunk",
           "audio": "assets/audio/ru/tam_odin_avtobus.mp3"
         },
         {
           "id": "tam_dva_avtobusa",
-          "text": "там 2 автобуса",
+          "text": "там два автобуса",
           "emoji": "👉2️⃣🚌",
           "type": "chunk",
           "audio": "assets/audio/ru/tam_dva_avtobusa.mp3"
@@ -1213,29 +1213,29 @@
             },
             {
               "id": "tap-24",
-              "text": "здесь 1 яблоко",
-              "audio": "assets/audio/ru/zdes_odin_yabloko.mp3",
+              "text": "здесь одно яблоко",
+              "audio": "assets/audio/ru/zdes_odno_yabloko.mp3",
               "options": [
-                "zdes_odin_yabloko",
+                "zdes_odno_yabloko",
                 "zdes_dva_yabloka",
                 "tam_yabloko"
               ],
-              "correct": "zdes_odin_yabloko"
+              "correct": "zdes_odno_yabloko"
             },
             {
               "id": "tap-25",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "options": [
                 "zdes_dva_yabloka",
-                "zdes_odin_yabloko",
+                "zdes_odno_yabloko",
                 "tam_yabloko"
               ],
               "correct": "zdes_dva_yabloka"
             },
             {
               "id": "tap-26",
-              "text": "там 1 автобус",
+              "text": "там один автобус",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "options": [
                 "tam_odin_avtobus",
@@ -1246,7 +1246,7 @@
             },
             {
               "id": "tap-27",
-              "text": "там 2 автобуса",
+              "text": "там два автобуса",
               "audio": "assets/audio/ru/tam_dva_avtobusa.mp3",
               "options": [
                 "tam_dva_avtobusa",
@@ -1279,7 +1279,7 @@
             },
             {
               "id": "tap-30",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "options": [
                 "zdes_dva_yabloka",
@@ -1296,8 +1296,8 @@
           "tasks": [
             {
               "id": "pic-1",
-              "text": "здесь 1 яблоко",
-              "audio": "assets/audio/ru/zdes_odin_yabloko.mp3",
+              "text": "здесь одно яблоко",
+              "audio": "assets/audio/ru/zdes_odno_yabloko.mp3",
               "correctScene": "near-one-apple",
               "options": [
                 "near-one-apple",
@@ -1307,7 +1307,7 @@
             },
             {
               "id": "pic-2",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "correctScene": "near-two-apples",
               "options": [
@@ -1318,7 +1318,7 @@
             },
             {
               "id": "pic-3",
-              "text": "там 1 автобус",
+              "text": "там один автобус",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "correctScene": "far-one-bus",
               "options": [
@@ -1329,7 +1329,7 @@
             },
             {
               "id": "pic-4",
-              "text": "там 2 автобуса",
+              "text": "там два автобуса",
               "audio": "assets/audio/ru/tam_dva_avtobusa.mp3",
               "correctScene": "far-two-buses",
               "options": [
@@ -1494,7 +1494,7 @@
             },
             {
               "id": "pic-19",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "correctScene": "near-two-apples",
               "options": [
@@ -1505,7 +1505,7 @@
             },
             {
               "id": "pic-20",
-              "text": "там 1 автобус",
+              "text": "там один автобус",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "correctScene": "far-one-bus",
               "options": [
@@ -1612,7 +1612,7 @@
             },
             {
               "id": "yn-6",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "scene": "near-two-apples",
               "correct": "da"
@@ -1675,7 +1675,7 @@
             },
             {
               "id": "yn-15",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "scene": "near-one-apple",
               "correct": "net"
@@ -1716,14 +1716,14 @@
             },
             {
               "id": "loc-5",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "scene": "near-two-apples-far-house",
               "correctZone": "near"
             },
             {
               "id": "loc-6",
-              "text": "там 1 автобус",
+              "text": "там один автобус",
               "audio": "assets/audio/ru/tam_odin_avtobus.mp3",
               "scene": "near-water-far-bus",
               "correctZone": "far"
@@ -1939,7 +1939,7 @@
             },
             {
               "id": "mini-8",
-              "text": "здесь 2 яблока",
+              "text": "здесь два яблока",
               "audio": "assets/audio/ru/zdes_dva_yabloka.mp3",
               "objects": [
                 {
