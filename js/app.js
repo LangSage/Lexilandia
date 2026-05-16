@@ -375,6 +375,7 @@
       clearSceneAnswers: clearSceneAnswers,
       entryButton: entryButton,
       escape: escapeHtml,
+      afterFeedback: afterFeedback,
       playFeedback: playFeedback,
       playPrompt: playPrompt,
       getMapAria: getMapAria,
@@ -426,20 +427,38 @@
     var feedback = chooseFeedback(feedbackList);
     if (!feedback) {
       return {
-        text: kind === "retry" ? "Ещё раз" : "Хорошо!"
+        text: kind === "retry" ? "Ещё раз" : "Хорошо!",
+        done: Promise.resolve(false)
       };
     }
 
     var variant = chooseFeedback(feedback.variants) || feedback;
     if (!variant.audio) {
-      return feedback;
+      return {
+        text: (feedback.emoji ? feedback.emoji + " " : "") + feedback.text,
+        done: Promise.resolve(false)
+      };
     }
 
     setWarning("");
-    window.LexiLandAudio.playAudio(variant.audio, feedback.text, setWarning);
+    var done = window.LexiLandAudio.playAudio(variant.audio, feedback.text, setWarning);
     return {
-      text: (feedback.emoji ? feedback.emoji + " " : "") + feedback.text
+      text: (feedback.emoji ? feedback.emoji + " " : "") + feedback.text,
+      done: done
     };
+  }
+
+  function afterFeedback(feedbackResult, callback) {
+    var done = feedbackResult && feedbackResult.done;
+
+    if (!done || typeof done.then !== "function") {
+      window.setTimeout(callback, 700);
+      return;
+    }
+
+    done.then(function () {
+      window.setTimeout(callback, 140);
+    });
   }
 
   function chooseFeedback(options) {

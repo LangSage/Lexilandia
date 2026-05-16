@@ -22,6 +22,7 @@ const USE_TTS_FALLBACK = false;
 
     return new Promise(function (resolve) {
       var settled = false;
+      var safetyTimer = null;
       var audio = new Audio(path);
       currentAudio = audio;
       audio.preload = "auto";
@@ -31,6 +32,9 @@ const USE_TTS_FALLBACK = false;
           return;
         }
         settled = true;
+        if (safetyTimer) {
+          window.clearTimeout(safetyTimer);
+        }
         resolve(value);
       }
 
@@ -44,7 +48,9 @@ const USE_TTS_FALLBACK = false;
       });
 
       audio.play().then(function () {
-        finish(true);
+        safetyTimer = window.setTimeout(function () {
+          finish(true);
+        }, 7000);
       }).catch(function () {
         handleMissing(currentRequest);
         finish(false);

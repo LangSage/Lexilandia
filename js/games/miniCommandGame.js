@@ -70,18 +70,20 @@
       if (isCorrectAction && isCorrectTarget) {
         canAnswer = false;
         feedback.className = "feedback good";
-        feedback.textContent = helpers.playFeedback("success").text;
+        var success = helpers.playFeedback("success");
+        feedback.textContent = success.text;
         root.querySelector(".mini-board").classList.add("success-pop");
-        window.setTimeout(options.onCorrect, 950);
+        helpers.afterFeedback(success, options.onCorrect);
         return;
       }
 
       feedback.className = "feedback try";
-      feedback.textContent = helpers.playFeedback("retry").text;
+      var retry = helpers.playFeedback("retry");
+      feedback.textContent = retry.text;
       root.querySelector(".mini-board").classList.add("show-target");
-      window.setTimeout(function () {
+      helpers.afterFeedback(retry, function () {
         helpers.playPrompt(task);
-      }, 760);
+      });
     }
 
     draw();
@@ -172,18 +174,20 @@
       if (target && player.x === target.x && player.y === target.y) {
         canAnswer = false;
         feedback.className = "feedback good";
-        feedback.textContent = helpers.playFeedback("success").text;
+        var success = helpers.playFeedback("success");
+        feedback.textContent = success.text;
         root.querySelector(".map-board").classList.add("success-pop");
-        window.setTimeout(options.onCorrect, 950);
+        helpers.afterFeedback(success, options.onCorrect);
         return;
       }
 
       feedback.className = "feedback try";
-      feedback.textContent = helpers.playFeedback("retry").text;
+      var retry = helpers.playFeedback("retry");
+      feedback.textContent = retry.text;
       root.querySelector(".map-board").classList.add("show-target");
-      window.setTimeout(function () {
+      helpers.afterFeedback(retry, function () {
         helpers.playPrompt(task);
-      }, 760);
+      });
     }
 
     draw();

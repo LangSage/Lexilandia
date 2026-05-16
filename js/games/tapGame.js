@@ -36,18 +36,20 @@
           canAnswer = false;
           button.classList.add("is-correct");
           feedback.className = "feedback good";
-          feedback.textContent = helpers.playFeedback("success").text;
-          window.setTimeout(options.onCorrect, 900);
+          var success = helpers.playFeedback("success");
+          feedback.textContent = success.text;
+          helpers.afterFeedback(success, options.onCorrect);
           return;
         }
 
         button.classList.add("is-wrong");
         correctButton.classList.add("show-correct");
         feedback.className = "feedback try";
-        feedback.textContent = helpers.playFeedback("retry").text;
-        window.setTimeout(function () {
+        var retry = helpers.playFeedback("retry");
+        feedback.textContent = retry.text;
+        helpers.afterFeedback(retry, function () {
           helpers.playPrompt(task);
-        }, 760);
+        });
       });
     });
   }
