@@ -104,7 +104,7 @@
 
     function draw() {
       root.innerHTML =
-        helpers.soundPanel(task) +
+        helpers.soundPanel(task, { visual: true }) +
         '<div id="map-feedback" class="feedback" aria-live="polite"></div>' +
         '<div class="map-board" style="grid-template-columns: repeat(' + helpers.mapWidth(task) + ', 1fr);">' +
           renderTiles() +

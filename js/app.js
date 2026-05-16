@@ -394,10 +394,12 @@
     };
   }
 
-  function soundPanel(task) {
+  function soundPanel(task, options) {
+    var showVisual = options && options.visual === true;
+
     return '<div class="sound-panel">' +
       '<div>' +
-        (task.emoji ? '<div class="prompt-visual" aria-hidden="true">' + escapeHtml(task.emoji) + '</div>' : "") +
+        (showVisual && task.emoji ? '<div class="prompt-visual" aria-hidden="true">' + escapeHtml(task.emoji) + '</div>' : "") +
         '<div class="prompt-text">' + escapeHtml(task.text) + '</div>' +
         '<div id="audio-warning" class="audio-warning" aria-live="polite"></div>' +
       '</div>' +
