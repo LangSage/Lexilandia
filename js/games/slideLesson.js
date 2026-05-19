@@ -8,13 +8,15 @@
     var answered = {};
     var questions = task.questions || [];
     var currentQuestionIndex = 0;
+    var hasCopy = isCopyTask(task);
     var hasQuestions = Boolean(questions.length);
+    var isTask = hasQuestions || hasCopy;
     var hasAudio = Boolean(task.audio && (!Array.isArray(task.audio) || task.audio.length));
 
     root.innerHTML =
-      '<section class="stage-card slide-card ' + (hasQuestions ? "task-card" : "info-card") + '">' +
-        '<div class="mode-badge ' + (hasQuestions ? "task-badge" : "info-badge") + '">' +
-          (hasQuestions ? "&#10067; &#1042;&#1099;&#1073;&#1077;&#1088;&#1080;" : "&#8505;&#65039; &#1057;&#1084;&#1086;&#1090;&#1088;&#1080;") +
+      '<section class="stage-card slide-card ' + (isTask ? "task-card" : "info-card") + '">' +
+        '<div class="mode-badge ' + (isTask ? "task-badge" : "info-badge") + '">' +
+          (isTask ? "&#10067; &#1042;&#1099;&#1073;&#1077;&#1088;&#1080;" : "&#8505;&#65039; &#1057;&#1084;&#1086;&#1090;&#1088;&#1080;") +
         '</div>' +
         renderSlideContent(task, helpers) +
         '<div id="slide-feedback" class="feedback" aria-live="polite"></div>' +
@@ -22,11 +24,12 @@
       '</section>' +
       '<div class="button-row slide-nav">' +
         (hasAudio ? '<button class="secondary-button" type="button" data-action="listen">▶️ Слушать</button>' : '<span></span>') +
-        '<button class="primary-button" type="button" data-action="next"' + (questions.length ? " disabled" : "") + '>Дальше</button>' +
+        '<button class="primary-button" type="button" data-action="next"' + (isTask ? " disabled" : "") + '>Дальше</button>' +
       '</div>';
 
     bindReveal(root, task, helpers);
     bindReading(root);
+    bindCopy(root, task, helpers);
     drawQuestion();
 
     if (hasAudio) {
@@ -112,18 +115,18 @@
   }
 
   function renderQuestion(question, questionIndex, questionCount, helpers) {
-      return '<div class="slide-question active-question" data-question="' + questionIndex + '">' +
-        (questionCount > 1 ? '<div class="question-step">' + (questionIndex + 1) + " / " + questionCount + '</div>' : "") +
-        '<p class="question-text">' + helpers.escape(question.text) + '</p>' +
-        '<div class="slide-answer-grid">' +
-          question.options.map(function (answer) {
-            return '<button class="answer-card slide-answer" type="button" data-question-index="' + questionIndex + '" data-choice="' + helpers.escape(answer.id) + '">' +
-              '<span class="answer-emoji" aria-hidden="true">' + helpers.escape(answer.emoji) + '</span>' +
-              '<span class="answer-text">' + helpers.escape(answer.text) + '</span>' +
-            '</button>';
-          }).join("") +
-        '</div>' +
-      '</div>';
+    return '<div class="slide-question active-question" data-question="' + questionIndex + '">' +
+      (questionCount > 1 ? '<div class="question-step">' + (questionIndex + 1) + " / " + questionCount + '</div>' : "") +
+      '<p class="question-text">' + helpers.escape(question.text) + '</p>' +
+      '<div class="slide-answer-grid">' +
+        question.options.map(function (answer) {
+          return '<button class="answer-card slide-answer" type="button" data-question-index="' + questionIndex + '" data-choice="' + helpers.escape(answer.id) + '">' +
+            '<span class="answer-emoji" aria-hidden="true">' + helpers.escape(answer.emoji) + '</span>' +
+            '<span class="answer-text">' + helpers.escape(answer.text) + '</span>' +
+          '</button>';
+        }).join("") +
+      '</div>' +
+    '</div>';
   }
 
   function bindReveal(root, task, helpers) {
@@ -152,6 +155,53 @@
         });
         button.classList.add("is-open");
       });
+    });
+  }
+
+  function bindCopy(root, task, helpers) {
+    if (!isCopyTask(task)) {
+      return;
+    }
+
+    var box = root.querySelector("[data-copy-target]");
+    var input = root.querySelector("[data-copy-input]");
+    var button = root.querySelector("[data-copy-check]");
+    var feedback = root.querySelector("[data-copy-feedback]");
+    var nextButton = root.querySelector('[data-action="next"]');
+
+    if (!box || !input || !button || !feedback || !nextButton) {
+      return;
+    }
+
+    function check() {
+      var target = box.getAttribute("data-copy-target") || "";
+      var isCorrect = normalizeCopy(input.value) === normalizeCopy(target);
+
+      if (isCorrect) {
+        var success = helpers.playFeedback("success");
+        feedback.className = "copy-feedback good";
+        feedback.textContent = success.text || "✅ Отлично";
+        input.disabled = true;
+        button.disabled = true;
+        nextButton.disabled = false;
+        return;
+      }
+
+      var retry = helpers.playFeedback("retry");
+      feedback.className = "copy-feedback try";
+      feedback.textContent = retry.text || "↩️ Ещё раз";
+    }
+
+    button.addEventListener("click", check);
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        check();
+      }
+    });
+    input.addEventListener("input", function () {
+      feedback.className = "copy-feedback";
+      feedback.textContent = "";
     });
   }
 
@@ -199,6 +249,45 @@
   function renderVisual(visual, helpers) {
     if (!visual) {
       return "";
+    }
+
+    if (visual.type === "letter-card") {
+      return '<div class="slide-visual letter-card-visual" aria-hidden="true">' +
+        '<div class="big-letter-pair">' + helpers.escape(visual.upper) + " " + helpers.escape(visual.lower) + '</div>' +
+        '<div class="letter-card-emoji">' + helpers.escape(visual.emoji || "") + '</div>' +
+      '</div>';
+    }
+
+    if (visual.type === "syllable-grid") {
+      return '<div class="slide-visual syllable-grid" aria-hidden="true">' +
+        (visual.items || []).map(function (item) {
+          return '<span class="syllable-chip">' + helpers.escape(item) + '</span>';
+        }).join("") +
+      '</div>';
+    }
+
+    if (visual.type === "word-list") {
+      if (!visual.items || !visual.items.length) {
+        return "";
+      }
+
+      return '<div class="slide-visual word-card-grid" aria-hidden="true">' +
+        visual.items.map(function (item) {
+          if (typeof item === "string") {
+            return '<span class="word-card">' + helpers.escape(item) + '</span>';
+          }
+          return '<span class="word-card"><span>' + helpers.escape(item.emoji || "") + '</span><strong>' + helpers.escape(item.text || "") + '</strong></span>';
+        }).join("") +
+      '</div>';
+    }
+
+    if (visual.type === "copy-line") {
+      return '<div class="slide-visual reading-copy-box" data-copy-target="' + helpers.escape(visual.text || "") + '">' +
+        '<p class="copy-original">' + helpers.escape(visual.text || "") + '</p>' +
+        '<input class="copy-input" data-copy-input type="text" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Напиши здесь">' +
+        '<button class="secondary-button copy-check-button" type="button" data-copy-check>Проверить</button>' +
+        '<div class="copy-feedback" data-copy-feedback aria-live="polite"></div>' +
+      '</div>';
     }
 
     if (visual.type === "emoji") {
@@ -249,6 +338,18 @@
 
   function stickman() {
     return '<span class="stickman"><span></span><span></span><span></span><span></span></span>';
+  }
+
+  function isCopyTask(task) {
+    return Boolean(task.visual && task.visual.type === "copy-line");
+  }
+
+  function normalizeCopy(value) {
+    return String(value || "")
+      .trim()
+      .replace(/\s+/g, " ")
+      .replace(/[.!?]+$/g, "")
+      .toLowerCase();
   }
 
   window.LexiLandGames = window.LexiLandGames || {};

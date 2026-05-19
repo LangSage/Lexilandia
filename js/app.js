@@ -20,7 +20,7 @@
 
   function init() {
     loadLessonData().then(function (loadedData) {
-      data = loadedData;
+      data = normalizeLessonData(loadedData);
       setCurrentLesson(0);
       renderHome();
     });
@@ -37,6 +37,17 @@
       .catch(function () {
         return buildFallbackData();
       });
+  }
+
+  function normalizeLessonData(loadedData) {
+    var lessons = loadedData.lessons || [];
+
+    if (window.LexiLandLevel0 && !lessons.some(function (item) { return item.id === window.LexiLandLevel0.id; })) {
+      lessons = [window.LexiLandLevel0].concat(lessons);
+    }
+
+    loadedData.lessons = lessons;
+    return loadedData;
   }
 
   function createMaps() {
@@ -106,7 +117,8 @@
     var units = getUnits(item);
     var complete = isLessonComplete(item);
     var unlocked = isLessonUnlocked(lessonIndex);
-    var label = "Урок " + (item.order || lessonIndex + 1) + (complete ? " ✅" : "");
+    var labelNumber = getLessonOrder(item, lessonIndex);
+    var label = "\u0423\u0440\u043e\u043a " + labelNumber + (complete ? " \u2705" : "");
 
     return '<section class="lesson-card">' +
       '<div class="pill-row">' +
@@ -119,6 +131,20 @@
         }).join("") +
       '</div>' +
     '</section>';
+  }
+
+  function getLessonOrder(item, fallbackIndex) {
+    var match = String(item.id || "").match(/^lesson-(\d+)/);
+
+    if (typeof item.order === "number") {
+      return item.order;
+    }
+
+    if (match) {
+      return Number(match[1]);
+    }
+
+    return fallbackIndex + 1;
   }
 
   function unitCard(unit, index, targetLesson, lessonIndex, lessonUnlocked) {
@@ -213,7 +239,7 @@
     var task = stage.tasks[position.taskIndex];
 
     if (stage.type === "slides") {
-      var slideHasQuestions = Boolean(task.questions && task.questions.length);
+      var slideHasQuestions = Boolean((task.questions && task.questions.length) || (task.visual && task.visual.type === "copy-line"));
       appRoot.innerHTML =
         renderLessonHeader(stage.title) +
         '<main class="lesson-screen ' + (slideHasQuestions ? "task-screen" : "info-screen") + '">' +
@@ -504,9 +530,8 @@
 
   function playFeedback(kind) {
     var feedbackList = lesson.feedbackAudio && lesson.feedbackAudio[kind];
-    var sharedFeedback = data.lessons && data.lessons[0] && data.lessons[0].feedbackAudio;
-    if (!feedbackList && sharedFeedback) {
-      feedbackList = sharedFeedback[kind];
+    if (!feedbackList) {
+      feedbackList = getSharedFeedback(kind);
     }
     var feedback = chooseFeedback(feedbackList);
     if (!feedback) {
@@ -530,6 +555,18 @@
       text: (feedback.emoji ? feedback.emoji + " " : "") + feedback.text,
       done: done
     };
+  }
+
+  function getSharedFeedback(kind) {
+    var lessons = data.lessons || [];
+
+    for (var i = 0; i < lessons.length; i += 1) {
+      if (lessons[i].feedbackAudio && lessons[i].feedbackAudio[kind]) {
+        return lessons[i].feedbackAudio[kind];
+      }
+    }
+
+    return null;
   }
 
   function afterFeedback(feedbackResult, callback) {
