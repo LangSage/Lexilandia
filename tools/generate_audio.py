@@ -1,4 +1,4 @@
-"""Generate Russian lesson audio from data/lessons.json.
+"""Generate Russian lesson audio from data/lessons.json and JS lesson modules.
 
 This script is for content production only. The website itself does not depend
 on Python, packages, or network services at runtime.
@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -26,6 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LESSONS_PATH = ROOT / "data" / "lessons.json"
+LEVEL0_PATH = ROOT / "js" / "level0Data.js"
 DEFAULT_VOICE = "ru-RU-SvetlanaNeural"
 DEFAULT_RATE = "-4%"
 DEFAULT_PITCH = "+0Hz"
@@ -41,9 +43,14 @@ class AudioLine:
 
 def load_audio_lines() -> list[AudioLine]:
     data = json.loads(LESSONS_PATH.read_text(encoding="utf-8"))
+    lessons = list(data["lessons"])
+    level0 = load_js_lesson(LEVEL0_PATH, "LexiLandLevel0")
+    if level0 and not any(lesson.get("id") == level0.get("id") for lesson in lessons):
+        lessons.insert(0, level0)
+
     lines: dict[str, AudioLine] = {}
 
-    for lesson in data["lessons"]:
+    for lesson in lessons:
         for feedback_group in (lesson.get("feedbackAudio") or {}).values():
             for feedback in normalize_feedback_group(feedback_group):
                 for variant in feedback.get("variants", []):
@@ -66,6 +73,31 @@ def load_audio_lines() -> list[AudioLine]:
                 collect_audio(lines, task)
 
     return sorted(lines.values(), key=lambda line: str(line.path))
+
+
+def load_js_lesson(path: Path, global_name: str) -> dict | None:
+    if not path.exists():
+        return None
+
+    script = (
+        f"require('./{path.relative_to(ROOT).as_posix()}');"
+        f"process.stdout.write(JSON.stringify(globalThis.{global_name} || null));"
+    )
+
+    try:
+        result = subprocess.run(
+            ["node", "-e", script],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        raise SystemExit(f"Could not load {path.relative_to(ROOT)} with Node.js") from exc
+
+    loaded = json.loads(result.stdout or "null")
+    return loaded if isinstance(loaded, dict) else None
 
 
 def normalize_feedback_group(group: object) -> list[dict]:

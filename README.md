@@ -115,7 +115,7 @@ python tools/generate_audio.py --force
 python tools/generate_audio.py --voice ru-RU-DmitryNeural
 ```
 
-The generator reads `data/lessons.json`, finds every `audio` path and feedback variant, and creates missing `.mp3` files. It is a content-production script only; the website still has no build step and no runtime dependencies.
+The generator reads `data/lessons.json` and `js/level0Data.js`, finds every `audio` path and feedback variant, and creates missing `.mp3` files. It is a content-production script only; the website still has no build step and no runtime dependencies.
 
 `js/audio.js` contains:
 
