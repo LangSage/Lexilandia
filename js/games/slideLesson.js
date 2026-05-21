@@ -298,7 +298,7 @@
           button.classList.add("is-correct");
           feedback.className = "feedback good";
           if (question.mode === "reading-check") {
-            feedback.textContent = question.correctFeedback || "Yes";
+            feedback.textContent = question.correctFeedback || "Да";
             window.setTimeout(onDone, 520);
             return;
           }
@@ -314,7 +314,7 @@
         }
         feedback.className = "feedback try";
         if (question.mode === "reading-check") {
-          feedback.textContent = question.wrongFeedback || "Look again 👀";
+          feedback.textContent = question.wrongFeedback || "Смотри ещё 👀";
           return;
         }
         feedback.textContent = helpers.playFeedback("retry").text;

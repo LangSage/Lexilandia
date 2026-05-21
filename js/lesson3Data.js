@@ -48,7 +48,7 @@
       correct: correct,
       mode: "reading-check",
       correctFeedback: correctFeedback,
-      wrongFeedback: "Look again 👀"
+      wrongFeedback: "Смотри ещё 👀"
     };
   }
 
@@ -93,16 +93,16 @@
   }
 
   var dictionary = [
-    entry("l3-ma", "ма", "ma sound", "👄", "syllable", "ma.mp3", "mouth.svg"),
-    entry("l3-mo", "мо", "mo sound", "👄", "syllable", "mo.mp3", "mouth.svg"),
-    entry("l3-am", "ам", "am sound", "🍽️", "syllable", "am.mp3", "plate.svg"),
-    entry("l3-om", "ом", "om sound", "🕉️", "syllable", "om.mp3", "om.svg"),
-    entry("l3-mama", "мама", "mom / mother", "👩", "word", "mama.mp3", "mama.svg"),
-    entry("l3-dom", "дом", "house / home", "🏠", "word", "dom.mp3", "house.svg"),
-    entry("l3-doma", "дома", "at home", "🏠", "word", "doma.mp3", "home.svg"),
-    entry("l3-tam", "там", "there", "👉", "word", "tam.mp3", "there.svg"),
-    entry("l3-on", "он", "he", "👦", "word", "on.mp3", "boy.svg"),
-    entry("l3-ona", "она", "she", "👧", "word", "ona.mp3", "girl.svg")
+    entry("l3-ma", "ма", "", "👄", "syllable", "ma.mp3", "mouth.svg"),
+    entry("l3-mo", "мо", "", "👄", "syllable", "mo.mp3", "mouth.svg"),
+    entry("l3-am", "ам", "", "🍽️", "syllable", "am.mp3", "plate.svg"),
+    entry("l3-om", "ом", "", "🕉️", "syllable", "om.mp3", "om.svg"),
+    entry("l3-mama", "мама", "", "👩", "word", "mama.mp3", "mama.svg"),
+    entry("l3-dom", "дом", "", "🏠", "word", "dom.mp3", "house.svg"),
+    entry("l3-doma", "дома", "", "🏠", "word", "doma.mp3", "home.svg"),
+    entry("l3-tam", "там", "", "👉", "word", "tam.mp3", "there.svg"),
+    entry("l3-on", "он", "", "👦", "word", "on.mp3", "boy.svg"),
+    entry("l3-ona", "она", "", "👧", "word", "ona.mp3", "girl.svg")
   ];
 
   var byWord = {};
@@ -124,158 +124,158 @@
   var slides = [
     slide(
       "l3-slide-1",
-      "Today you read real words!",
+      "Ты читаешь!",
       [
-        "Today we read small Russian words.",
+        "ма мо ам ом",
         "мама дом там он она",
-        "Click the words. Look at emoji. Read again."
+        "👆 👀 🔁"
       ],
       imageCards([byWord["мама"], byWord["дом"], byWord["там"], byWord["он"], byWord["она"]]),
       [line("мама дом там он она", "l3_intro_words.mp3")]
     ),
     slide(
       "l3-slide-2",
-      "Read slowly",
+      "Медленно",
       ["ма ма ма", "м + а = ма"],
       focus([byWord["ма"], byWord["мама"]]),
       [line("ма ма ма", "l3_ma_warmup.mp3")]
     ),
     slide(
       "l3-slide-3",
-      "Another sound",
+      "Ещё звук",
       ["мо мо мо", "м + о = мо"],
       focus([byWord["мо"]]),
       [line("мо мо мо", "l3_mo_warmup.mp3")]
     ),
     slide(
       "l3-slide-4",
-      "Read the syllables",
+      "Слоги",
       ["ма", "мо", "ам", "ом"],
       imageCards([byWord["ма"], byWord["мо"], byWord["ам"], byWord["ом"]]),
       [line("ма мо ам ом", "l3_syllables.mp3")]
     ),
     slide(
       "l3-slide-5",
-      "First real word",
+      "Первое слово",
       ["мама", "ма + ма = мама"],
       focus([byWord["мама"]]),
       [line("ма ма мама", "l3_mama_first.mp3")]
     ),
     slide(
       "l3-slide-6",
-      "Read",
-      ["мама", "мама", "мама", "Same word. Read with confidence."],
+      "Читай",
+      ["мама", "мама", "мама", "👩 👩 👩"],
       imageCards([byWord["мама"], byWord["мама"], byWord["мама"]]),
       [line("мама мама мама", "l3_mama_repeat.mp3")]
     ),
     slide(
       "l3-slide-7",
-      "A small word",
+      "Маленькое слово",
       ["дом", "д + о + м = дом"],
       focus([byWord["дом"]]),
       [line("дом", "l3_dom_first.mp3")]
     ),
     slide(
       "l3-slide-8",
-      "Read two words",
+      "Два слова",
       ["мама", "дом"],
       imageCards([byWord["мама"], byWord["дом"]]),
       [line("мама дом", "l3_mama_dom.mp3")]
     ),
     slide(
       "l3-slide-9",
-      "Point and read",
-      ["там", "там = there"],
+      "Смотри и читай",
+      ["там", "👉"],
       focus([byWord["там"]]),
       [line("там", "l3_tam_first.mp3")]
     ),
     slide(
       "l3-slide-10",
-      "Mini reading",
+      "Мини-чтение",
       ["мама там."],
       imageCards([byWord["мама"], byWord["там"]]),
       [line("мама там", "l3_mama_tam.mp3")],
       [
-        readingQuestion("l3-q10", "Who is there?", [
+        readingQuestion("l3-q10", "Кто там?", [
           option("mama", "мама", "👩"),
           option("dom", "дом", "🏠")
-        ], "mama", "Yes: мама 👩")
+        ], "mama", "Да: мама 👩")
       ]
     ),
     slide(
       "l3-slide-11",
-      "Read a tiny word",
+      "Маленькое слово",
       ["он"],
       focus([byWord["он"]]),
       [line("он", "l3_on.mp3")]
     ),
     slide(
       "l3-slide-12",
-      "Read another tiny word",
+      "Ещё слово",
       ["она"],
       focus([byWord["она"]]),
       [line("она", "l3_ona.mp3")]
     ),
     slide(
       "l3-slide-13",
-      "Look and read",
-      ["он 👦", "она 👧", "One small letter changes the word."],
+      "Смотри и читай",
+      ["он 👦", "она 👧", "👀"],
       imageCards([byWord["он"], byWord["она"]]),
       [line("он она", "l3_on_ona.mp3")]
     ),
     slide(
       "l3-slide-14",
-      "Mini reading",
+      "Мини-чтение",
       ["она там."],
       imageCards([byWord["она"], byWord["там"]]),
       [line("она там", "l3_ona_tam.mp3")],
       [
-        readingQuestion("l3-q14", "Who is there?", [
+        readingQuestion("l3-q14", "Кто там?", [
           option("ona", "она", "👧"),
           option("on", "он", "👦")
-        ], "ona", "Yes: она там. 👧👉")
+        ], "ona", "Да: она там. 👧👉")
       ]
     ),
     slide(
       "l3-slide-15",
-      "Read",
+      "Читай",
       ["он дома."],
       imageCards([byWord["он"], byWord["дома"]]),
       [line("он дома", "l3_on_doma.mp3")],
       [
-        readingQuestion("l3-q15", "Where is he?", [
+        readingQuestion("l3-q15", "Где он?", [
           option("doma", "дома", "🏠"),
           option("tam", "там", "👉")
-        ], "doma", "Yes: дома 🏠")
+        ], "doma", "Да: дома 🏠")
       ]
     ),
     slide(
       "l3-slide-16",
       "дом → дома",
-      ["дом 🏠", "дома 🏠", "дом = house", "дома = at home"],
+      ["дом 🏠", "дома 🏠", "🏠", "🏠👦"],
       imageCards([byWord["дом"], byWord["дома"]]),
       [line("дом дома", "l3_dom_doma.mp3")]
     ),
     slide(
       "l3-slide-17",
-      "Read a tiny story",
+      "Маленькая история",
       ["мама дома.", "она там."],
       imageCards([byWord["мама"], byWord["дома"], byWord["она"], byWord["там"]]),
       [line("мама дома. она там", "l3_story_1.mp3")],
       [
-        readingQuestion("l3-q17-1", "Who is at home?", [
+        readingQuestion("l3-q17-1", "Кто дома?", [
           option("mama", "мама", "👩"),
           option("ona", "она", "👧")
-        ], "mama", "Yes: мама 👩"),
-        readingQuestion("l3-q17-2", "Who is there?", [
+        ], "mama", "Да: мама 👩"),
+        readingQuestion("l3-q17-2", "Кто там?", [
           option("ona", "она", "👧"),
           option("mama", "мама", "👩")
-        ], "ona", "Yes: она 👧")
+        ], "ona", "Да: она 👧")
       ]
     ),
     slide(
       "l3-slide-18",
-      "You can read!",
+      "Ты читаешь!",
       [
         "мама",
         "дом",
@@ -283,8 +283,8 @@
         "там",
         "он",
         "она",
-        "Read again. Click any word.",
-        "Great! You read real Russian words."
+        "👆 👀 🔁",
+        "Отлично! ✅"
       ],
       imageCards([byWord["мама"], byWord["дом"], byWord["дома"], byWord["там"], byWord["он"], byWord["она"]]),
       [line("мама дом дома там он она", "l3_final_words.mp3")]
@@ -294,14 +294,14 @@
   root.LexiLandLesson3 = {
     id: "lesson-3-mama-dom-tam",
     order: 3,
-    title: "Lesson 3: мама, дом, там",
-    level: "Level 0",
+    title: "Урок 3: мама, дом, там",
+    level: "Уровень 0",
     dictionary: dictionary,
     scenes: [],
     units: [
       {
         id: "unit-lesson-3-reading",
-        title: "Unit 1 — First Russian Reading",
+        title: "Чтение 1",
         icon: "📖",
         stages: [
           {
