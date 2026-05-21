@@ -531,12 +531,12 @@
     if (Array.isArray(task.audio)) {
       return playAudioList(task.audio);
     }
-    return window.LexiLandAudio.playAudio(task.audio, task.text, setWarning);
+    return window.LexiLandAudio.playAudio(task.audio, task.speechText || task.text, setWarning);
   }
 
   function playEntry(entry) {
     setWarning("");
-    window.LexiLandAudio.playAudio(entry.audio, entry.text, setWarning);
+    window.LexiLandAudio.playAudio(entry.audio, entry.speechText || entry.text, setWarning);
   }
 
   function playAudioList(items) {
@@ -545,7 +545,7 @@
 
     queue.forEach(function (item) {
       chain = chain.then(function () {
-        return window.LexiLandAudio.playAudio(item.audio, item.text, setWarning);
+        return window.LexiLandAudio.playAudio(item.audio, item.speechText || item.text, setWarning);
       });
     });
 

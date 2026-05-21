@@ -5,6 +5,7 @@
   var imageRoot = "assets/img/lesson3/";
   var READING_RATE = "-22%";
   var PHONICS_RATE = "-50%";
+  var WORD_RATE = "-40%";
 
   function audio(file) {
     return audioRoot + file;
@@ -14,19 +15,45 @@
     return imageRoot + file;
   }
 
-  function line(text, file, rate) {
-    return {
+  function line(text, file, rate, speechText) {
+    var item = {
       text: text,
       audio: audio(file),
       rate: rate || READING_RATE
     };
+
+    if (speechText && speechText !== text) {
+      item.speechText = speechText;
+    }
+
+    return item;
+  }
+
+  function pauseBetweenWords(text) {
+    var words = String(text || "")
+      .replace(/[.!?;:]+/g, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    if (words.length < 2) {
+      return text;
+    }
+
+    return words.join(". ") + ".";
   }
 
   function phonicsLine(text, file) {
-    return line(text, file, PHONICS_RATE);
+    return line(text, file, PHONICS_RATE, pauseBetweenWords(text));
+  }
+
+  function wordLine(text, file) {
+    return line(text, file, WORD_RATE, pauseBetweenWords(text));
   }
 
   function entry(id, word, translation, emoji, type, file, imageFile) {
+    var rate = type === "syllable" ? PHONICS_RATE : WORD_RATE;
+
     return {
       id: id,
       text: word,
@@ -35,6 +62,7 @@
       emoji: emoji,
       type: type || "word",
       audio: audio(file || id + ".mp3"),
+      rate: rate,
       image: imageFile ? image(imageFile) : ""
     };
   }
@@ -138,7 +166,7 @@
         "👆 👀 🔁"
       ],
       imageCards([byWord["мама"], byWord["дом"], byWord["там"], byWord["он"], byWord["она"]]),
-      [line("мама дом там он она", "l3_intro_words.mp3")]
+      [wordLine("мама дом там он она", "l3_intro_words.mp3")]
     ),
     slide(
       "l3-slide-2",
@@ -173,35 +201,35 @@
       "Читай",
       ["мама", "мама", "мама", "👩 👩 👩"],
       imageCards([byWord["мама"], byWord["мама"], byWord["мама"]]),
-      [line("мама мама мама", "l3_mama_repeat.mp3")]
+      [wordLine("мама мама мама", "l3_mama_repeat.mp3")]
     ),
     slide(
       "l3-slide-7",
       "Маленькое слово",
       ["дом", "д + о + м = дом"],
       focus([byWord["дом"]]),
-      [line("дом", "l3_dom_first.mp3")]
+      [wordLine("дом", "l3_dom_first.mp3")]
     ),
     slide(
       "l3-slide-8",
       "Два слова",
       ["мама", "дом"],
       imageCards([byWord["мама"], byWord["дом"]]),
-      [line("мама дом", "l3_mama_dom.mp3")]
+      [wordLine("мама дом", "l3_mama_dom.mp3")]
     ),
     slide(
       "l3-slide-9",
       "Смотри и читай",
       ["там", "👉"],
       focus([byWord["там"]]),
-      [line("там", "l3_tam_first.mp3")]
+      [wordLine("там", "l3_tam_first.mp3")]
     ),
     slide(
       "l3-slide-10",
       "Мини-чтение",
       ["мама там."],
       imageCards([byWord["мама"], byWord["там"]]),
-      [line("мама там", "l3_mama_tam.mp3")],
+      [wordLine("мама там", "l3_mama_tam.mp3")],
       [
         readingQuestion("l3-q10", "Кто там?", [
           option("mama", "мама", "👩"),
@@ -214,28 +242,28 @@
       "Маленькое слово",
       ["он"],
       focus([byWord["он"]]),
-      [line("он", "l3_on.mp3")]
+      [wordLine("он", "l3_on.mp3")]
     ),
     slide(
       "l3-slide-12",
       "Ещё слово",
       ["она"],
       focus([byWord["она"]]),
-      [line("она", "l3_ona.mp3")]
+      [wordLine("она", "l3_ona.mp3")]
     ),
     slide(
       "l3-slide-13",
       "Смотри и читай",
       ["он 👦", "она 👧", "👀"],
       imageCards([byWord["он"], byWord["она"]]),
-      [line("он она", "l3_on_ona.mp3")]
+      [wordLine("он она", "l3_on_ona.mp3")]
     ),
     slide(
       "l3-slide-14",
       "Мини-чтение",
       ["она там."],
       imageCards([byWord["она"], byWord["там"]]),
-      [line("она там", "l3_ona_tam.mp3")],
+      [wordLine("она там", "l3_ona_tam.mp3")],
       [
         readingQuestion("l3-q14", "Кто там?", [
           option("ona", "она", "👧"),
@@ -248,7 +276,7 @@
       "Читай",
       ["он дома."],
       imageCards([byWord["он"], byWord["дома"]]),
-      [line("он дома", "l3_on_doma.mp3")],
+      [wordLine("он дома", "l3_on_doma.mp3")],
       [
         readingQuestion("l3-q15", "Где он?", [
           option("doma", "дома", "🏠"),
@@ -261,14 +289,14 @@
       "дом → дома",
       ["дом 🏠", "дома 🏠", "🏠", "🏠👦"],
       imageCards([byWord["дом"], byWord["дома"]]),
-      [line("дом дома", "l3_dom_doma.mp3")]
+      [wordLine("дом дома", "l3_dom_doma.mp3")]
     ),
     slide(
       "l3-slide-17",
       "Маленькая история",
       ["мама дома.", "она там."],
       imageCards([byWord["мама"], byWord["дома"], byWord["она"], byWord["там"]]),
-      [line("мама дома. она там", "l3_story_1.mp3")],
+      [wordLine("мама дома. она там", "l3_story_1.mp3")],
       [
         readingQuestion("l3-q17-1", "Кто дома?", [
           option("mama", "мама", "👩"),
@@ -294,7 +322,7 @@
         "Отлично! ✅"
       ],
       imageCards([byWord["мама"], byWord["дом"], byWord["дома"], byWord["там"], byWord["он"], byWord["она"]]),
-      [line("мама дом дома там он она", "l3_final_words.mp3")]
+      [wordLine("мама дом дома там он она", "l3_final_words.mp3")]
     )
   ];
 

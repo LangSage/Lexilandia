@@ -4,6 +4,7 @@
   var audioRoot = "assets/audio/ru/";
   var READING_RATE = "-22%";
   var PHONICS_RATE = "-50%";
+  var WORD_RATE = "-40%";
   var dictionaryMap = {};
   var dictionary = [];
 
@@ -11,7 +12,7 @@
     return audioRoot + file;
   }
 
-  function entry(id, text, emoji, type, file) {
+  function entry(id, text, emoji, type, file, rate) {
     var item = {
       id: id,
       text: text,
@@ -19,6 +20,10 @@
       type: type,
       audio: audio(file || id + ".mp3")
     };
+
+    if (rate) {
+      item.rate = rate;
+    }
 
     if (!dictionaryMap[id]) {
       dictionaryMap[id] = item;
@@ -28,16 +33,40 @@
     return dictionaryMap[id];
   }
 
-  function line(text, file, rate) {
-    return {
+  function line(text, file, rate, speechText) {
+    var item = {
       text: text,
       audio: audio(file),
       rate: rate || READING_RATE
     };
+
+    if (speechText && speechText !== text) {
+      item.speechText = speechText;
+    }
+
+    return item;
+  }
+
+  function pauseBetweenWords(text) {
+    var words = String(text || "")
+      .replace(/[.!?;:]+/g, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    if (words.length < 2) {
+      return text;
+    }
+
+    return words.join(". ") + ".";
   }
 
   function phonicsLine(text, file) {
-    return line(text, file, PHONICS_RATE);
+    return line(text, file, PHONICS_RATE, pauseBetweenWords(text));
+  }
+
+  function wordLine(text, file) {
+    return line(text, file, WORD_RATE, pauseBetweenWords(text));
   }
 
   function option(id, text, emoji) {
@@ -125,19 +154,19 @@
   }
 
   function letterEntry(letter) {
-    return entry("l0-letter-" + letter[0], letter[1] + " " + letter[2], letter[3], "letter", letter[0] + ".mp3");
+    return entry("l0-letter-" + letter[0], letter[1] + " " + letter[2], letter[3], "letter", letter[0] + ".mp3", PHONICS_RATE);
   }
 
   function syllableEntry(text) {
-    return entry("l0-syllable-" + slug(text), text, "🔶", "syllable", slug(text) + ".mp3");
+    return entry("l0-syllable-" + slug(text), text, "🔶", "syllable", slug(text) + ".mp3", PHONICS_RATE);
   }
 
   function wordEntry(word) {
-    return entry("l0-word-" + word[0], word[1], word[2], "word", word[0] + ".mp3");
+    return entry("l0-word-" + word[0], word[1], word[2], "word", word[0] + ".mp3", WORD_RATE);
   }
 
   function textEntry(id, text, emoji) {
-    return entry("l0-text-" + id, text, emoji, "text", id + ".mp3");
+    return entry("l0-text-" + id, text, emoji, "text", id + ".mp3", WORD_RATE);
   }
 
   function asOption(item) {
@@ -178,7 +207,7 @@
           return { text: item.text, emoji: item.emoji };
         })
       },
-      [line(entries.map(function (item) { return item.text; }).join(" "), unitId + "_words_" + index + ".mp3")]
+      [wordLine(entries.map(function (item) { return item.text; }).join(" "), unitId + "_words_" + index + ".mp3")]
     );
   }
 
@@ -190,7 +219,7 @@
       title || "Читай",
       lines,
       { type: "word-list", items: [] },
-      [line(text, unitId + "_reading_" + index + ".mp3")],
+      [wordLine(text, unitId + "_reading_" + index + ".mp3")],
       questions
     );
     task.reading = true;
@@ -530,7 +559,7 @@
       "Выбери",
       ["Выбери"],
       { type: "word-list", items: [{ text: firstWord.text, emoji: firstWord.emoji }] },
-      [line(firstWord.text, firstWord.audio.replace(audioRoot, ""))],
+      [wordLine(firstWord.text, firstWord.audio.replace(audioRoot, ""))],
       [
         question("l0-u" + unitNumber + "-q-word", "Выбери " + firstWord.text, optionWords, firstWord.id)
       ]
@@ -655,7 +684,7 @@
                 asOption(syllableEntry("му"))
               ], syllableMa.id)
             ]),
-            slide(unitId + "-word", "Слово", ["Выбери"], { type: "word-list", items: [{ text: "мама", emoji: "👩" }] }, [line("мама", "mama.mp3")], [
+            slide(unitId + "-word", "Слово", ["Выбери"], { type: "word-list", items: [{ text: "мама", emoji: "👩" }] }, [wordLine("мама", "mama.mp3")], [
               question("l0-final-q-word", "Выбери мама", [
                 asOption(wordMama),
                 asOption(wordDom),
@@ -675,7 +704,7 @@
                 asOption(letterEntry(["r", "Р", "р", "🚀"]))
               ], "l0-letter-m")
             ]),
-            slide(unitId + "-same-word", "Выбери", ["Выбери"], { type: "word-list", items: [{ text: "дом", emoji: "🏠" }] }, [line("дом", "dom.mp3")], [
+            slide(unitId + "-same-word", "Выбери", ["Выбери"], { type: "word-list", items: [{ text: "дом", emoji: "🏠" }] }, [wordLine("дом", "dom.mp3")], [
               question("l0-final-q-dom", "Выбери дом", [
                 asOption(wordDom),
                 asOption(wordEntry(["sok", "сок", "🧃"])),
@@ -689,7 +718,7 @@
                 asOption(syllableEntry("лу"))
               ], "l0-syllable-lo")
             ]),
-            slide(unitId + "-same-word-2", "Слово", ["Выбери"], { type: "word-list", items: [{ text: "вода", emoji: "💧" }] }, [line("вода", "voda.mp3")], [
+            slide(unitId + "-same-word-2", "Слово", ["Выбери"], { type: "word-list", items: [{ text: "вода", emoji: "💧" }] }, [wordLine("вода", "voda.mp3")], [
               question("l0-final-q-voda", "Выбери вода", [
                 asOption(wordEntry(["voda", "вода", "💧"])),
                 asOption(wordEntry(["dom", "дом", "🏠"])),

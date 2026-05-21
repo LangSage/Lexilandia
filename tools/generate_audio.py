@@ -75,7 +75,14 @@ def load_audio_lines() -> list[AudioLine]:
                     add_line(lines, feedback["text"], feedback["audio"])
 
         for entry in lesson.get("dictionary", []):
-            add_line(lines, entry["text"], entry["audio"])
+            add_line(
+                lines,
+                entry["text"],
+                entry["audio"],
+                rate=entry.get("rate"),
+                pitch=entry.get("pitch"),
+                speech_text=entry.get("speechText"),
+            )
 
         for stage in iter_stages(lesson):
             for task in stage.get("tasks", []):
@@ -135,13 +142,14 @@ def add_line(
     *,
     rate: str | None = None,
     pitch: str | None = None,
+    speech_text: str | None = None,
 ) -> None:
     target = ROOT / audio_path
     existing = lines.get(str(target))
     if existing and existing.rate and not rate:
         return
 
-    lines[str(target)] = AudioLine(text=text, path=target, rate=rate, pitch=pitch)
+    lines[str(target)] = AudioLine(text=speech_text or text, path=target, rate=rate, pitch=pitch)
 
 
 def collect_audio(lines: dict[str, AudioLine], value: object, fallback_text: str = "") -> None:
@@ -156,6 +164,7 @@ def collect_audio(lines: dict[str, AudioLine], value: object, fallback_text: str
                 audio_value,
                 rate=value.get("rate"),
                 pitch=value.get("pitch"),
+                speech_text=value.get("speechText"),
             )
 
         if isinstance(audio_value, list):
