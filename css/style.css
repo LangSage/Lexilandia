@@ -1380,6 +1380,16 @@ button {
   text-align: center;
 }
 
+.unit-pass-count {
+  margin: 0;
+  padding: 8px 12px;
+  border: 2px solid var(--orange);
+  background: var(--orange-soft);
+  color: var(--orange-dark);
+  font-size: 1rem;
+  font-weight: 1000;
+}
+
 .word-list {
   display: flex;
   flex-wrap: wrap;

@@ -164,6 +164,7 @@
     var progress = getUnitProgress(unit.id, targetLesson);
     var hasProgress = !complete && typeof progress.stageIndex === "number";
     var unlocked = lessonUnlocked && isUnitUnlocked(index, targetLesson);
+    var passCount = getUnitPassCount(unit.id, targetLesson);
     var status = "🔒";
     var action = "";
     var disabled = true;
@@ -171,7 +172,7 @@
     if (unit.comingSoon) {
       status = "Скоро";
     } else if (complete) {
-      status = "✅ Готово";
+      status = "✅ " + formatPassCount(passCount);
       action = "Ещё раз";
       disabled = false;
     } else if (unlocked && hasProgress) {
@@ -385,6 +386,7 @@
   function renderFinish() {
     markUnitComplete();
     var unit = getCurrentUnit();
+    var passCount = getUnitPassCount(unit.id);
 
     appRoot.innerHTML =
       renderLessonHeader("✅ Готово") +
@@ -393,6 +395,7 @@
           '<div class="intro-emoji" aria-hidden="true">✅</div>' +
           '<h2 class="big-russian">Готово</h2>' +
           '<p class="unit-finish-title">' + escapeHtml(unit.title) + '</p>' +
+          '<p class="unit-pass-count">✅ ' + escapeHtml(formatPassCount(passCount)) + '</p>' +
           '<ul class="word-list">' +
             lesson.dictionary.filter(function (entry) {
               return entry.type === "word";
@@ -410,7 +413,7 @@
 
     appRoot.querySelector('[data-action="home"]').addEventListener("click", renderHome);
     appRoot.querySelector('[data-action="again"]').addEventListener("click", function () {
-      startFrom(0, 0);
+      startFrom(position.unitIndex, 0, 0);
     });
   }
 
@@ -491,14 +494,37 @@
     return Boolean(getUnitProgress(unitId, targetLesson).complete);
   }
 
-  function isUnitUnlocked(index, targetLesson) {
-    var units = getUnits(targetLesson);
+  function getUnitPassCount(unitId, targetLesson) {
+    var progress = getUnitProgress(unitId, targetLesson);
 
-    if (index === 0) {
-      return true;
+    if (typeof progress.completionCount === "number") {
+      return progress.completionCount;
     }
 
-    return isUnitComplete(units[index - 1].id, targetLesson);
+    if (typeof progress.passCount === "number") {
+      return progress.passCount;
+    }
+
+    return progress.complete ? 1 : 0;
+  }
+
+  function formatPassCount(count) {
+    var value = Number(count) || 0;
+    var lastTwo = value % 100;
+    var last = value % 10;
+    var word = "раз";
+
+    if (lastTwo < 11 || lastTwo > 14) {
+      if (last >= 2 && last <= 4) {
+        word = "раза";
+      }
+    }
+
+    return value + " " + word;
+  }
+
+  function isUnitUnlocked(index, targetLesson) {
+    return true;
   }
 
   function isLessonComplete(targetLesson) {
@@ -851,6 +877,7 @@
     units[unit.id] = {
       complete: Boolean(units[unit.id] && units[unit.id].complete),
       completedAt: units[unit.id] && units[unit.id].completedAt,
+      completionCount: getUnitPassCount(unit.id),
       stageIndex: position.stageIndex,
       taskIndex: position.taskIndex
     };
@@ -867,9 +894,11 @@
     var existing = progress[lesson.id] || {};
     var units = existing.units || {};
     var unit = getCurrentUnit();
+    var completionCount = getUnitPassCount(unit.id) + 1;
     units[unit.id] = {
       complete: true,
-      completedAt: new Date().toISOString()
+      completedAt: new Date().toISOString(),
+      completionCount: completionCount
     };
     progress[lesson.id] = {
       complete: getUnits().filter(function (item) {
