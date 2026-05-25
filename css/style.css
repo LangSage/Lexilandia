@@ -972,6 +972,13 @@ button {
   text-align: center;
 }
 
+.question-visual {
+  margin: 0 auto 6px;
+  font-size: clamp(2.2rem, 12dvh, 4.6rem);
+  line-height: 1;
+  text-align: center;
+}
+
 .slide-answer-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

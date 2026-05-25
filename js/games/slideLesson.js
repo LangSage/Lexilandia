@@ -145,6 +145,7 @@
 
     return '<div class="slide-question active-question" data-question="' + questionIndex + '">' +
       (questionCount > 1 ? '<div class="question-step">' + (questionIndex + 1) + " / " + questionCount + '</div>' : "") +
+      (question.visual ? '<div class="question-visual" aria-hidden="true">' + helpers.escape(question.visual) + '</div>' : "") +
       '<p class="question-text">' + helpers.escape(question.text) + '</p>' +
       '<div class="slide-answer-grid">' +
         options.map(function (answer) {
