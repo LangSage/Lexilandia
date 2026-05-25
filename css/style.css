@@ -1373,6 +1373,10 @@ button {
   background: #173329;
 }
 
+.map-tile.action {
+  background: #1b2e38;
+}
+
 .map-tile.object {
   background: #302819;
 }
@@ -1454,6 +1458,11 @@ button {
 .control-button.ok {
   color: var(--green);
   background: var(--green-soft);
+}
+
+.map-check-button {
+  font-size: 1.08rem;
+  line-height: 1.12;
 }
 
 .control-button.no {

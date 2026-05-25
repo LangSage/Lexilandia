@@ -158,7 +158,9 @@
     function drawFinal() {
       var total = totalTasks(game);
       var percent = total ? state.correct / total : 0;
-      var result = percent >= 0.9 ? "Отлично! ✅" : percent >= 0.6 ? "Хорошо! 👍" : "Попробуй ещё! 🔁";
+      var result = game.finalTitle || (percent >= 0.9 ? "Отлично! ✅" : percent >= 0.6 ? "Хорошо! 👍" : "Попробуй ещё! 🔁");
+      var finalText = game.finalText || "Ты читаешь! 📖";
+      var finalWords = game.finalWords || ["кто?", "что?", "где?", "здесь", "там"];
 
       state.completed = true;
       saveState(game, state);
@@ -167,9 +169,11 @@
         '<section class="stage-card unit2-game-card unit2-game-final">' +
           '<div class="unit2-game-final-mark">✅</div>' +
           '<h2 class="unit2-game-title">' + result + '</h2>' +
-          '<p class="unit2-game-big">Ты читаешь! 📖</p>' +
+          '<p class="unit2-game-big">' + helpers.escape(finalText) + '</p>' +
           '<div class="unit2-final-words">' +
-            '<span>кто?</span><span>что?</span><span>где?</span><span>здесь</span><span>там</span>' +
+            finalWords.map(function (word) {
+              return '<span>' + helpers.escape(word) + '</span>';
+            }).join("") +
           '</div>' +
           '<div class="unit2-score-row">' +
             '<span>✅ ' + state.correct + '</span>' +

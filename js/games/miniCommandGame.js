@@ -105,6 +105,7 @@
     function draw() {
       root.innerHTML =
         helpers.soundPanel(task, { visual: true }) +
+        (task.roundLabel ? '<div class="question-step map-round-step">' + helpers.escape(task.roundLabel) + '</div>' : "") +
         '<div id="map-feedback" class="feedback" aria-live="polite"></div>' +
         '<div class="map-board" style="grid-template-columns: repeat(' + helpers.mapWidth(task) + ', 1fr);">' +
           renderTiles() +
@@ -114,12 +115,38 @@
           '<button class="control-button" type="button" data-dir="up">↑</button>' +
           '<span></span>' +
           '<button class="control-button" type="button" data-dir="left">←</button>' +
-          '<button class="control-button ok" type="button" data-check="yes">✅</button>' +
+          '<button class="control-button ok map-check-button" type="button" data-check="yes">' + helpers.escape(task.checkLabel || "✅") + '</button>' +
           '<button class="control-button" type="button" data-dir="right">→</button>' +
           '<span></span>' +
           '<button class="control-button" type="button" data-dir="down">↓</button>' +
           '<span></span>' +
         '</div>';
+
+      root.tabIndex = 0;
+      root.onkeydown = function (event) {
+        var keyMap = {
+          ArrowUp: "up",
+          w: "up",
+          W: "up",
+          ArrowDown: "down",
+          s: "down",
+          S: "down",
+          ArrowLeft: "left",
+          a: "left",
+          A: "left",
+          ArrowRight: "right",
+          d: "right",
+          D: "right"
+        };
+        var direction = keyMap[event.key];
+        if (!direction || !canAnswer) {
+          return;
+        }
+        event.preventDefault();
+        move(direction);
+        draw();
+      };
+      root.focus();
 
       helpers.bindSound(root, task);
 
@@ -177,7 +204,7 @@
         canAnswer = false;
         feedback.className = "feedback good";
         var success = helpers.playFeedback("success");
-        feedback.textContent = success.text;
+        feedback.textContent = task.correctFeedback || success.text;
         root.querySelector(".map-board").classList.add("success-pop");
         helpers.afterFeedback(success, options.onCorrect);
         return;
@@ -185,7 +212,7 @@
 
       feedback.className = "feedback try";
       var retry = helpers.playFeedback("retry");
-      feedback.textContent = retry.text;
+      feedback.textContent = task.wrongFeedback || retry.text;
       root.querySelector(".map-board").classList.add("show-target");
       helpers.afterFeedback(retry, function () {
         helpers.playPrompt(task);

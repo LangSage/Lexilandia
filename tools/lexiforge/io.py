@@ -101,6 +101,10 @@ def load_runtime_lessons(include_generated: bool = True) -> list[dict[str, Any]]
     if isinstance(unit2, dict) and not any(item.get("id") == unit2.get("id") for item in lessons):
         lessons.append(unit2)
 
+    unit3 = load_js_global(ROOT / "js" / "unit3Data.js", "LexiLandUnit3Lesson")
+    if isinstance(unit3, dict) and not any(item.get("id") == unit3.get("id") for item in lessons):
+        lessons.append(unit3)
+
     if include_generated:
         generated = load_js_global(ROOT / "js" / "lexiforgeGenerated.js", "LexiForgeGeneratedLessons")
         if isinstance(generated, list):
